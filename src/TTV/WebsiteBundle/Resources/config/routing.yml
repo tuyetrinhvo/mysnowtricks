@@ -1,0 +1,3 @@
+ttv_website_homepage:
+    path:     /
+    defaults: { _controller: TTVWebsiteBundle:Default:index }
