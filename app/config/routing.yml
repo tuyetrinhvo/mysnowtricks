@@ -1,3 +1,7 @@
+ttv_user:
+    resource: "@TTVUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ttv_website:
     resource: "@TTVWebsiteBundle/Resources/config/routing.yml"
     prefix:   /
