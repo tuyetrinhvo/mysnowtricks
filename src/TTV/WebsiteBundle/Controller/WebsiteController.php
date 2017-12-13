@@ -21,12 +21,12 @@ class WebsiteController extends Controller
 
     }
 
-    public function editAction()
+    public function editAction($id)
     {
 
     }
 
-    public function deleteAction()
+    public function deleteAction($id)
     {
 
     }
