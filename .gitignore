@@ -21,7 +21,7 @@
 /build/
 
 # PHPUnit
-/phpunit.xml.dist
+/phpunit.xml
 
 
 # Assets and user uploads
