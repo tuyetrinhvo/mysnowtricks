@@ -1,3 +1,29 @@
 ttv_website_homepage:
     path:     /
-    defaults: { _controller: TTVWebsiteBundle:Default:index }
+    defaults: { _controller: TTVWebsiteBundle:Website:index }
+
+ttv_website_view:
+    path:    /figure/{id}
+    defaults:
+        _controller: TTVWebsiteBundle:Website:view
+        _requirements:
+            id: \d+
+
+ttv_website_add:
+    path:    /add
+    defaults:
+        _controller: TTVWebsiteBundle:Website:add
+
+ttv_website_edit:
+    path:   /edit/{id}
+    defaults:
+       _controller: TTVWebsiteBundle:Website:edit
+    requirements:
+        id: \d+
+
+ttv_website_delete:
+    path:   /delete/{id}
+    defaults:
+        _controller: TTVWebsiteBundle:Website:delete
+    requirements:
+        id: \d+
