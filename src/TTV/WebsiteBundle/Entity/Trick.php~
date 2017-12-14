@@ -254,28 +254,4 @@ class Trick
     {
         return $this->category;
     }
-
-    /**
-     * Set user
-     *
-     * @param \TTV\UserBundle\Entity\User $user
-     *
-     * @return Trick
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \TTV\UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

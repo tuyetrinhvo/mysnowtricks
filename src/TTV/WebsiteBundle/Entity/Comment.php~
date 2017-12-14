@@ -164,28 +164,4 @@ class Comment
     {
         return $this->trick;
     }
-
-    /**
-     * Set user
-     *
-     * @param \TTV\UserBundle\Entity\User $user
-     *
-     * @return Comment
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \TTV\UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }
