@@ -43,13 +43,6 @@ class Trick
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
-     */
-    private $author;
-
-    /**
      * @ORM\OneToOne(targetEntity="TTV\WebsiteBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
@@ -93,7 +86,7 @@ class Trick
      *
      * @return Trick
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
 
@@ -157,31 +150,6 @@ class Trick
     {
         return $this->description;
     }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Trick
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
 
     /**
      * Set image
@@ -262,7 +230,7 @@ class Trick
      *
      * @return Trick
      */
-    public function setUser(User $user)
+    public function setUser(\TTV\UserBundle\Entity\User $user)
     {
         $this->user = $user;
 
