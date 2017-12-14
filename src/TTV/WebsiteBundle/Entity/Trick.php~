@@ -3,12 +3,14 @@
 namespace TTV\WebsiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Trick
  *
  * @ORM\Table(name="trick")
  * @ORM\Entity(repositoryClass="TTV\WebsiteBundle\Repository\TrickRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Trick
 {
@@ -43,11 +45,15 @@ class Trick
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $author;
+    private $updatedAt;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\OneToOne(targetEntity="TTV\WebsiteBundle\Entity\Image", cascade={"persist"})
@@ -77,6 +83,13 @@ class Trick
     }
 
     /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \DateTime());
+    }
+    /**
      * Get id
      *
      * @return int
@@ -93,7 +106,7 @@ class Trick
      *
      * @return Trick
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
 
@@ -157,31 +170,6 @@ class Trick
     {
         return $this->description;
     }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Trick
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
 
     /**
      * Set image
@@ -253,5 +241,53 @@ class Trick
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \TTV\UserBundle\Entity\User $user
+     *
+     * @return Trick
+     */
+    public function setUser(\TTV\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \TTV\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Trick
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
