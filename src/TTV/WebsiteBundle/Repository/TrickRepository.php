@@ -2,6 +2,8 @@
 
 namespace TTV\WebsiteBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * TrickRepository
  *
@@ -10,4 +12,34 @@ namespace TTV\WebsiteBundle\Repository;
  */
 class TrickRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getTrick($id, $page, $nbPerPage)
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.image', 'i')
+            ->addSelect('i')
+            ->leftJoin('t.user', 'u')
+            ->addSelect('u')
+            ->leftJoin('t.category', 'c')
+            ->addSelect('c')
+            ->where('t.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+
+        $query->setFirstResult(($page-1) * $nbPerPage)->setMaxResults($nbPerPage);
+        return new Paginator($query, true);
+    }
+    public function getAllTricks()
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.image', 'i')
+            ->addSelect('i')
+            ->leftJoin('t.user', 'u')
+            ->addSelect('u')
+            ->leftJoin('t.category', 'c')
+            ->addSelect('c')
+            ->orderBy('t.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

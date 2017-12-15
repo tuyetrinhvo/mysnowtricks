@@ -167,7 +167,7 @@ class User
      *
      * @return User
      */
-    public function setImage(Image $image = null)
+    public function setImage(\TTV\WebsiteBundle\Entity\Image $image = null)
     {
         $this->image = $image;
 

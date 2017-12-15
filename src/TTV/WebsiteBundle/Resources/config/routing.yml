@@ -1,6 +1,10 @@
 ttv_website_homepage:
-    path:     /
-    defaults: { _controller: TTVWebsiteBundle:Website:index }
+    path:     /{page}
+    defaults:
+        _controller: TTVWebsiteBundle:Website:index
+        page: 1
+    requirements:
+        page: \d*
 
 ttv_website_view:
     path:    /figure/{id}

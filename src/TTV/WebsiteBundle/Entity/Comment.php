@@ -141,7 +141,7 @@ class Comment
      *
      * @return Comment
      */
-    public function setUser(User $user)
+    public function setUser(\TTV\UserBundle\Entity\User $user)
     {
         $this->user = $user;
 
