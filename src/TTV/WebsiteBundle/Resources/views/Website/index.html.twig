@@ -1,1 +1,16 @@
 {% extends "TTVWebsiteBundle::layout.html.twig" %}
+
+{% block title %}
+    Liste des tricks - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <ul>
+        {% for trick in listTricks %}
+            <li>{{ trick.name }}</li>
+            <li>{{ trick.description }}</li>
+
+        {% endfor %}
+    </ul>
+{% endblock %}

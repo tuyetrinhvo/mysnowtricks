@@ -159,28 +159,5 @@ class User
     {
         return $this->role;
     }
-
-    /**
-     * Set image
-     *
-     * @param \TTV\WebsiteBundle\Entity\Image $image
-     *
-     * @return User
-     */
-    public function setImage(\TTV\WebsiteBundle\Entity\Image $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \TTV\WebsiteBundle\Entity\Image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
 }
+
