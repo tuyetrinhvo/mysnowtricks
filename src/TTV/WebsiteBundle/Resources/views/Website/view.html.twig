@@ -1,1 +1,191 @@
 {% extends "TTVWebsiteBundle::layout.html.twig" %}
+
+{% block title %}
+    {# {{ trick.name }} #} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        {% for message in app.session.flashBag.get('info') %}
+            <p>Message flash : {{ message }}</p>
+        {% endfor %}
+    </div>
+
+
+    <!-- All blog posts -->
+    <div class="mar-top-lg row">
+        <!-- Left part -->
+        <div class="col-md-8 blog-main">
+            <div class="post-detail sep-bottom-lg">
+                <figure class="no-margin">
+                    <img src="/uploads/grab-tail-grab.jpg" alt="grab-tail-grab" class="img-responsive" />
+                </figure>
+                <div class="post-detail-body sep-xs">
+                    <h3 class="text-uppercase">Designtorget</h3>
+                    <span class="line-sep-gray"></span>
+                    <p>
+                        <span class="letter-dropcap"> L</span>
+                        orem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna
+                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit
+                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        <<img src="/uploads/grab-tail-grab.jpg" alt="grab-tail-grab" class="alignleft" width="200"/>
+                        Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.
+                        Nullam varius, turpis et commodo pharetra, est eros bibendum elit,
+                        nec luctus magna felis sollicitudin mauris. Integer in mauris
+                        eu nibh euismod gravida. Duis ac tellus et risus vulputate
+                        vehicula. Donec lobortis risus a elit. Etiam tempor. Ut
+                        ullamcorper, ligula eu tempor congue, eros est euismod turpis,
+                        id tincidunt sapien risus a quam. Maecenas fermentum consequat
+                        mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.
+                    </p>
+                    <blockquote>
+                        <p>
+                            <i>
+                                Integer in mauris
+                                eu nibh euismod gravida. Duis ac tellus et risus vulputate
+                                vehicula. Donec lobortis risus a elit. Etiam tempor. Ut
+                                ullamcorper, ligula eu tempor congue, eros est euismod turpis,
+                                id tincidunt sapien risus a quam. Maecenas fermentum consequat
+                                mi. Donec fermentum.
+                            </i></p>
+                    </blockquote>
+                    <p>
+                        Fusce convallis, mauris imperdiet gravida bibendum, nisl
+                        turpis suscipit mauris, sed placerat ipsum urna sed risus.
+                        In convallis tellus a mauris. Curabitur non elit ut libero
+                        tristique sodales. Mauris a lacus. Donec mattis semper leo.
+                        In hac habitasse platea dictumst. Vivamus facilisis diam at
+                        odio. Mauris dictum, nisi eget consequat elementum, lacus
+                        ligula molestie metus, non feugiat orci magna ac sem. Donec
+                        turpis. Donec vitae metus. Morbi tristique neque eu mauris.
+                        Quisque gravida ipsum non sapien. Proin turpis lacus, scelerisque
+                        vitae, elementum at, lobortis ac, quam. Aliquam dictum eleifend
+                        risus. In hac habitasse platea dictumst. Etiam sit amet diam.
+                        Suspendisse odio. Suspendisse nunc. In semper bibendum libero.
+                    </p>
+
+                </div>
+            </div>
+            <div class="post-detail mar-top-xs">
+                <div class="post-detail-body sep-xs">
+                    <h3>Comments</h3>
+                    <span class="line-sep-gray"></span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" alt="64x64" src="/uploads/profil-02.png" data-holder-rendered="true" />
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading text-primary">John Doe <span class="pull-right small text-muted"><i>1h ago</i></span></h4>
+                                <p>
+                                    Cras sit amet nibh libero, in gravida nulla.
+                                    Nulla vel metus scelerisque ante sollicitudin commodo.
+                                    Cras purus odio, vestibulum in vulputate at, tempus
+                                    viverra turpis.
+                                </p>
+                            </div>
+                        </li>
+                        <!-- Nested media object -->
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" alt="64x64" src="/uploads/profil-01.png" data-holder-rendered="true" />
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading text-primary">Jule Doe <span class="pull-right small text-muted"><i>2h ago</i></span></h4>
+                                <p>
+                                    Cras sit amet nibh libero, in gravida nulla.
+                                    Nulla vel metus scelerisque ante sollicitudin commodo.
+                                    Cras purus odio, vestibulum in vulputate at, tempus
+                                    viverra turpis.
+                                </p>
+                            </div>
+                        </li>
+                        <!-- Nested media object -->
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" alt="64x64" src="/uploads/profil-02.png" data-holder-rendered="true" />
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading text-primary">Jihn Doe <span class="pull-right small text-muted"><i>3h ago</i></span></h4>
+                                <p>
+                                    Cras sit amet nibh libero, in gravida nulla.
+                                    Nulla vel metus scelerisque ante sollicitudin commodo.
+                                    Cras purus odio, vestibulum in vulputate at, tempus
+                                    viverra turpis.
+                                </p>
+                            </div>
+                        </li>
+                        <!-- Nested media object -->
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" alt="64x64" src="/uploads/profil-01.png" data-holder-rendered="true" />
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading text-primary">Jane Doe <span class="pull-right small text-muted"><i>4h ago</i></span></h4>
+                                <p>
+                                    Cras sit amet nibh libero, in gravida nulla.
+                                    Nulla vel metus scelerisque ante sollicitudin commodo.
+                                    Cras purus odio, vestibulum in vulputate at,
+                                    tempus viverra turpis.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <h4 class="mar-top-md">Add a comment.</h4>
+                    <span class="line-sep-gray"></span>
+                    <p>All the inputs are required.</p>
+                    <form class="form-horizontal mar-top-sm wow fadeIn"  data-wow-duration="1s" data-wow-delay=".3s" method="post" action="/" name="commentForm" novalidate="">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group control-group">
+                                    <input type="text" class="form-control input-lg" id="firstname" name="firstname" placeholder="First Name* :" required="" data-validation-required-message="Please enter your first name." />
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="form-group control-group">
+                                    <input type="text" class="form-control input-lg" id="lastname" name="lastname" placeholder="Last Name* :" required="" data-validation-required-message="Please enter your last name."  />
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="form-group control-group">
+                                    <input type="email" class="form-control input-lg" id="email" name="email" placeholder="E-mail* :" required="" data-validation-required-message="Please enter your email address." />
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group control-group">
+                                    <textarea class="form-control" name="comment" placeholder="Comment* :" required="" data-validation-required-message="Please enter a Text."></textarea>
+                                    <p class="help-block"></p>
+                                </div>
+                                <button type="submit" class="submit btn btn-primary pull-right" >Post</button>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </form>
+                </div>
+            </div>
+            <div class="nav-links mar-top-md">
+                <a href="blog-post-gallery.html" class="text-uppercase pull-left" ><i class="iline1-arrowhead2"></i> Preview Post</a>
+                <a href="blog-post-carousel.html" class="text-uppercase pull-right" >Next Post <i class="iline1-chevron15"></i></a>
+            </div>
+
+        </div>
+        <!-- /Left part -->
+    </div>
+    <!-- / All blog posts -->
+{% endblock %}

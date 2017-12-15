@@ -12,7 +12,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class TrickRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getTrick($id, $page, $nbPerPage)
+    public function getTrick($id)
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.image', 'i')
@@ -25,10 +25,9 @@ class TrickRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('id', $id)
             ->getQuery();
 
-        $query->setFirstResult(($page-1) * $nbPerPage)->setMaxResults($nbPerPage);
-        return new Paginator($query, true);
+
     }
-    public function getAllTricks()
+    public function getAllTricks($page, $nbPerPage)
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.image', 'i')
@@ -38,8 +37,9 @@ class TrickRepository extends \Doctrine\ORM\EntityRepository
             ->leftJoin('t.category', 'c')
             ->addSelect('c')
             ->orderBy('t.id', 'DESC')
-            ->getQuery()
-            ->getResult()
-            ;
+            ->getQuery();
+
+        $query->setFirstResult(($page -1 ) * $nbPerPage)->setMaxResults($nbPerPage);
+        return new Paginator($query, true);
     }
 }
