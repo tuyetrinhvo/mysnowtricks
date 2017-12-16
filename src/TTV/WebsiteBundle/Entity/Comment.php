@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="TTV\WebsiteBundle\Repository\CommentRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment
 {
@@ -43,13 +44,28 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     public function __construct()
     {
         $this->date = new \DateTime();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function increase()
+    {
+        $this->getTrick()->increaseComment();
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function decrease()
+    {
+        $this->getTrick()->decreaseComment();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace TTV\WebsiteBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -45,6 +46,11 @@ class Trick
     private $description;
 
     /**
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published = true;
+
+    /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -72,11 +78,26 @@ class Trick
      */
     private $comments;
 
+    /**
+     * @ORM\Column(name="nb_comments", type="integer")
+     */
+    private $nbComments = 0;
+
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->comments = new ArrayCollection();
     }
 
+    public function increaseComment()
+    {
+        $this->nbComments++;
+    }
+
+    public function decreaseComment()
+    {
+        $this->nbComments--;
+    }
     /**
      * @ORM\PreUpdate
      */
@@ -261,5 +282,41 @@ class Trick
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \TTV\WebsiteBundle\Entity\Comment $comment
+     *
+     * @return Trick
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        $comment->setTrick($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \TTV\WebsiteBundle\Entity\Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

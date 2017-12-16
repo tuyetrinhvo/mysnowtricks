@@ -46,6 +46,11 @@ class Trick
     private $description;
 
     /**
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published = true;
+
+    /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -73,12 +78,26 @@ class Trick
      */
     private $comments;
 
+    /**
+     * @ORM\Column(name="nb_comments", type="integer")
+     */
+    private $nbComments = 0;
+
     public function __construct()
     {
         $this->date = new \DateTime();
         $this->comments = new ArrayCollection();
     }
 
+    public function increaseComment()
+    {
+        $this->nbComments++;
+    }
+
+    public function decreaseComment()
+    {
+        $this->nbComments--;
+    }
     /**
      * @ORM\PreUpdate
      */
@@ -275,7 +294,7 @@ class Trick
     public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
-        
+
         $comment->setTrick($this);
 
         return $this;
@@ -299,5 +318,53 @@ class Trick
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return Trick
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * Set nbComments
+     *
+     * @param integer $nbComments
+     *
+     * @return Trick
+     */
+    public function setNbComments($nbComments)
+    {
+        $this->nbComments = $nbComments;
+
+        return $this;
+    }
+
+    /**
+     * Get nbComments
+     *
+     * @return integer
+     */
+    public function getNbComments()
+    {
+        return $this->nbComments;
     }
 }
