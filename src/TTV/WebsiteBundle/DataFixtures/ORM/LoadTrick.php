@@ -30,47 +30,41 @@ class LoadTrick implements FixtureInterface
         $user1->setUsername('Trinh');
         $user1->setPassword('123');
         $user1->setSalt('je ne sais pas');
-        $user1->setRole(["admin" => "admin"]);
+        $user1->setRole([]);
+        $user1->setAvatar('profil-01.png');
+        $user1->setAlt('profil-01');
 
         $user2 = new User();
-        $user2->setUsername('Mai');
+        $user2->setUsername('Lys');
         $user2->setPassword('123');
-        $user2->setSalt('je ne sais pas');
-        $user2->setRole(["user" => "user"]);
+        $user2->setSalt('je ne sais pas encore');
+        $user2->setRole([]);
+        $user2->setAvatar('profil-02.png');
+        $user2->setAlt('profil-02');
 
+        $comment = new Comment();
+        $comment->setContent('test');
+        $comment->setUser($user2);
+
+        $image = new Image();
+        $image->setExtension('mute-grab.jpg');
+        $image->setAlt('mute-grab');
+
+        $video = new Video();
+        $video->setUrl('https://www.youtube.com/watch?v=M5NTCfdObfs');
 
         $trick1 = new Trick();
         $trick1->setName('Grab Mute');
         $trick1->setDescription('Un grab consiste à attraper la planche avec la main pendant le saut. Mute : saisie de la carre frontside de la planche entre les deux pieds avec la main avant.');
         $trick1->setCategory($category1);
         $trick1->setUser($user1);
+        $trick1->addComment($comment);
+        $trick1->addImage($image);
+        $trick1->addVideo($video);
 
 
-        $image = new Image();
-        $image->setExtension('mute-grab.jpg');
-        $image->setAlt('mute-grab');
-
-        $image1 = new Image();
-        $image1->setExtension('profil-01.png');
-        $image1->setAlt('profil-01');
-
-        $image->setTrick($trick1);
-        
-        $video = new Video();
-        $video->setUrl('https://www.youtube.com/watch?v=M5NTCfdObfs');
-        $video->setTrick($trick1);
-
-        $comment1 = new Comment();
-        $comment1->setContent("Je ne peux pas encore faire ça !");
-        $comment1->setTrick($trick1);
-        $comment1->setUser($user2);
-
-        $user2->setImage($image1);
 
         $manager->persist($trick1);
-        $manager->persist($image);
-        $manager->persist($video);
-        $manager->persist($comment1);
         $manager->persist($category1);
         $manager->persist($category2);
         $manager->persist($category3);

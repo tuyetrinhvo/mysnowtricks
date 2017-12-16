@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="trick")
  * @ORM\Entity(repositoryClass="TTV\WebsiteBundle\Repository\TrickRepository")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class Trick
 {
@@ -61,7 +61,6 @@ class Trick
      */
     private $slug;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Category")
      * @ORM\JoinColumn(nullable=false)
@@ -70,13 +69,30 @@ class Trick
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Comment", mappedBy="trick")
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Comment", mappedBy="trick", cascade={"persist", "remove"})
      */
     private $comments;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
+     */
+    private $images;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Video", mappedBy="trick", cascade={"persist", "remove"})
+     */
+    private $videos;
 
     /**
      * @ORM\Column(name="nb_comments", type="integer")
@@ -87,6 +103,8 @@ class Trick
     {
         $this->date = new \DateTime();
         $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     public function increaseComment()
@@ -243,7 +261,7 @@ class Trick
      *
      * @return Trick
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
 
@@ -366,5 +384,77 @@ class Trick
     public function getNbComments()
     {
         return $this->nbComments;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \TTV\WebsiteBundle\Entity\Image $image
+     *
+     * @return Trick
+     */
+    public function addImage(Image $image)
+    {
+        $image->setTrick($this);
+
+        $this->getImages()->add($image);
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \TTV\WebsiteBundle\Entity\Image $image
+     */
+    public function removeImage(Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Add video
+     *
+     * @param \TTV\WebsiteBundle\Entity\Video $video
+     *
+     * @return Trick
+     */
+    public function addVideo(Video $video)
+    {
+        $video->setTrick($this);
+
+        $this->getVideos()->add($video);
+
+        return $this;
+    }
+
+    /**
+     * Remove video
+     *
+     * @param \TTV\WebsiteBundle\Entity\Video $video
+     */
+    public function removeVideo(Video $video)
+    {
+        $this->videos->removeElement($video);
+    }
+
+    /**
+     * Get videos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVideos()
+    {
+        return $this->videos;
     }
 }

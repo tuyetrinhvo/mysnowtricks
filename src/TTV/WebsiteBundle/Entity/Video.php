@@ -29,7 +29,7 @@ class Video
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick")
+     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick", inversedBy="videos")
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;

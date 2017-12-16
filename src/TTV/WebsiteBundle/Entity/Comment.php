@@ -44,6 +44,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 

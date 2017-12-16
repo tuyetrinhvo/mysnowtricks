@@ -48,6 +48,7 @@ class Image
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
 
@@ -186,7 +187,7 @@ class Image
     }
     public function getUploadDir()
     {
-        return 'uploads';
+        return 'uploads/tricks';
     }
 
     protected function getUploadRootDir()
@@ -206,7 +207,7 @@ class Image
      *
      * @return Image
      */
-    public function setTrick(Trick $trick  = null)
+    public function setTrick(Trick $trick)
     {
         $this->trick = $trick;
 

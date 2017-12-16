@@ -70,6 +70,7 @@ class Trick
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
@@ -77,6 +78,16 @@ class Trick
      * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Comment", mappedBy="trick")
      */
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Image", mappedBy="trick")
+     */
+    private $images;
+
+    /**
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Video", mappedBy="trick")
+     */
+    private $videos;
 
     /**
      * @ORM\Column(name="nb_comments", type="integer")
@@ -318,5 +329,53 @@ class Trick
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return Trick
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * Set nbComments
+     *
+     * @param integer $nbComments
+     *
+     * @return Trick
+     */
+    public function setNbComments($nbComments)
+    {
+        $this->nbComments = $nbComments;
+
+        return $this;
+    }
+
+    /**
+     * Get nbComments
+     *
+     * @return integer
+     */
+    public function getNbComments()
+    {
+        return $this->nbComments;
     }
 }
