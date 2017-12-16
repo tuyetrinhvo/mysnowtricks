@@ -47,7 +47,7 @@ class Image
     private $tempFilename;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick")
+     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;

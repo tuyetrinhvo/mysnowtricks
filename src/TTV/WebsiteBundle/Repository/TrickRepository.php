@@ -18,28 +18,28 @@ class TrickRepository extends EntityRepository
         $query = $this->createQueryBuilder('t')
                     ->leftJoin('t.user', 'u')
                     ->addSelect('u')
-                    ->leftJoin('t.comments', 'co')
-                    ->addSelect('co')
-                    ->leftJoin('t.category', 'c')
-                    ->addSelect('c')
-                    ->leftJoin('t.im', 'i')
+                    ->leftJoin('t.category', 'ca')
+                    ->addSelect('ca')
+                    ->leftJoin('t.images', 'i')
                     ->addSelect('i')
-                    ->where('t.id = :id')
+                    ->leftJoin('t.videos', 'v')
+                    ->addSelect('v')
+                    ->andWhere('t.id = :id')
                     ->setParameter('id', $id)
                     ->getQuery();
-        return $query->getOneOrNullResult();
+        return $query->getResult();
 
 
     }
     public function getAllTricks($page, $nbPerPage)
     {
         $query = $this  ->createQueryBuilder('t')
-                        ->leftJoin('t.image', 'i')
+                        ->leftJoin('t.images', 'i')
                         ->addSelect('i')
                         ->leftJoin('t.user', 'u')
                         ->addSelect('u')
-                        ->leftJoin('t.category', 'c')
-                        ->addSelect('c')
+                        ->leftJoin('t.category', 'ca')
+                        ->addSelect('ca')
                         ->orderBy('t.date', 'DESC')
                         ->addOrderBy('t.updatedAt', 'DESC')
                         ->getQuery();
@@ -48,5 +48,31 @@ class TrickRepository extends EntityRepository
                 ->setMaxResults($nbPerPage);
 
         return new Paginator($query, true);
+    }
+
+    public function getPreviousTrick($currentId)
+    {
+        $query = $this  ->createQueryBuilder('t')
+                        ->where('t.id < :currentId')
+                        ->setParameter(':currentId', $currentId)
+                        ->orderBy('t.id', 'DESC')
+                        ->setFirstResult(0)
+                        ->setMaxResults(1)
+                        ->getQuery();
+
+        $query->getOneOrNullResult();
+    }
+
+    public function getNextTrick($currentId)
+    {
+        $query = $this  ->createQueryBuilder('t')
+                        ->where('t.id > :$currentId')
+                        ->setParameter(':currentId', $currentId)
+                        ->orderBy('t.id', 'ASC')
+                        ->setFirstResult(0)
+                        ->setMaxResults(1)
+                        ->getQuery();
+
+        $query->getOneOrNullResult();
     }
 }

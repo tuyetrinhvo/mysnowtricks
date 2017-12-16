@@ -40,15 +40,15 @@ class WebsiteController extends Controller
     public function viewAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $trick = $em->getRepository('TTVWebsiteBundle:Trick')->find($id);
+        $trick = $em->getRepository('TTVWebsiteBundle:Trick')->getTrick($id);
 
         if (null === $trick){
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
         }
-        $listComments = $em ->getRepository('TTVWebsiteBundle:Comment')->findBy(['trick' => $trick]);
-        $listCategories = $em->getRepository('TTVWebsiteBundle:Category')->findBy(['trick' => $trick]);
+        // $listComments = $em ->getRepository('TTVWebsiteBundle:Comment')->getCommentsByTrick($trick, $page, $nbPerPage);
 
-        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' => $listComments, 'listCategories' => $listCategories]);
+
+        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick]);
     }
 
     public function addAction(Request $request)

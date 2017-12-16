@@ -6,40 +6,33 @@
 
 {% block body %}
 
-    {#<ul>
-        {% for trick in listTricks %}
-            <li>{{ trick.name }}</li>
-            <li>{{ trick.description }}</li>
-
-        {% endfor %}
-    </ul>#}
-
-
     <!-- All blog posts -->
     <div class="mar-top-lg">
         <ul class="isotope-blog">
             <!-- .blog-post -->
-
+        {% for trick in listTricks %}
             <li class="blog-post wow fadeInUp" data-wow-duration="1s" data-wow-delay=".7s">
                         <span class="blog-date"><a href="{{ path('ttv_website_edit', {'id': 3}) }}"> <img src="/assets/images/update.png" alt="Modifier"/></a>
                           <small class="blog-month"><a href="{{ path('ttv_website_delete', {'id': 3}) }}"> <img src="/assets/images/delete.png" alt="Supprimer"/></a></small>
                         </span>
                 <div class="blog-body">
-                    <img src="/assets/images/post-1.jpg" alt="post 1" class="img-responsive img-full" />
-                    <h4 class="text-primary text-center text-uppercase">Nom la figure</h4>
+                    <img src="{{ asset('uploads/tricks/'~trick.images[0].extension~'') }}" alt="{{ trick.images[0].alt }}" class="img-responsive img-full" />
+                    <h4 class="text-primary text-center text-uppercase">{{ trick.name }}</h4>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do [...]
+                        {{ trick.description }}
                     </p>
-                    <a class="btn btn-primary" href="#" role="button" title="continue reading"> En Savoir Plus</a>
+                    <a class="btn btn-primary" href="{{ path('ttv_website_view', {'id': trick.id })}}" role="button" title="continue reading"> En Savoir Plus</a>
                 </div>
             </li>
+        {% endfor %}
             <!-- /.blog-post -->
         </ul>
+
         <!-- .navigation -->
         <nav class="navigation paging-navigation">
             <ul class="page-numbers pagination">
                 {% for p in range (1, nbPages) %}
-                <li{% if p == page %}> class="current" {% endif %}>
+                <li{% if p == page %} class="current" {% endif %}>
                 <a class="page-numbers pagination" href="{{ path('ttv_website_homepage', {'page' : p}) }}">{{ p }}</a>
                 </li>
                 {% endfor %}
