@@ -9,6 +9,7 @@ use TTV\WebsiteBundle\Entity\Category;
 use TTV\WebsiteBundle\Entity\Image;
 use TTV\WebsiteBundle\Entity\Trick;
 use TTV\WebsiteBundle\Entity\Comment;
+use TTV\WebsiteBundle\Entity\Video;
 
 
 class LoadTrick implements FixtureInterface
@@ -37,6 +38,14 @@ class LoadTrick implements FixtureInterface
         $user2->setSalt('je ne sais pas');
         $user2->setRole(["user" => "user"]);
 
+
+        $trick1 = new Trick();
+        $trick1->setName('Grab Mute');
+        $trick1->setDescription('Un grab consiste à attraper la planche avec la main pendant le saut. Mute : saisie de la carre frontside de la planche entre les deux pieds avec la main avant.');
+        $trick1->setCategory($category1);
+        $trick1->setUser($user1);
+
+
         $image = new Image();
         $image->setExtension('mute-grab.jpg');
         $image->setAlt('mute-grab');
@@ -45,12 +54,11 @@ class LoadTrick implements FixtureInterface
         $image1->setExtension('profil-01.png');
         $image1->setAlt('profil-01');
 
-        $trick1 = new Trick();
-        $trick1->setName('Grab Mute');
-        $trick1->setDescription('Un grab consiste à attraper la planche avec la main pendant le saut. Mute : saisie de la carre frontside de la planche entre les deux pieds avec la main avant.');
-        $trick1->setCategory($category1);
-        $trick1->setUser($user1);
-        $trick1->setImage($image);
+        $image->setTrick($trick1);
+        
+        $video = new Video();
+        $video->setUrl('https://www.youtube.com/watch?v=M5NTCfdObfs');
+        $video->setTrick($trick1);
 
         $comment1 = new Comment();
         $comment1->setContent("Je ne peux pas encore faire ça !");
@@ -60,6 +68,8 @@ class LoadTrick implements FixtureInterface
         $user2->setImage($image1);
 
         $manager->persist($trick1);
+        $manager->persist($image);
+        $manager->persist($video);
         $manager->persist($comment1);
         $manager->persist($category1);
         $manager->persist($category2);

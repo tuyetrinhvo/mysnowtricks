@@ -47,6 +47,11 @@ class Image
     private $tempFilename;
 
     /**
+     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick")
+     */
+    private $trick;
+
+    /**
      * Get id
      *
      * @return int
@@ -192,5 +197,29 @@ class Image
     public function getWebPath()
     {
         return $this->getUploadDir().'/'.$this->getId().'.'.$this->getExtension();
+    }
+
+    /**
+     * Set trick
+     *
+     * @param \TTV\WebsiteBundle\Entity\Trick $trick
+     *
+     * @return Image
+     */
+    public function setTrick(Trick $trick  = null)
+    {
+        $this->trick = $trick;
+
+        return $this;
+    }
+
+    /**
+     * Get trick
+     *
+     * @return \TTV\WebsiteBundle\Entity\Trick
+     */
+    public function getTrick()
+    {
+        return $this->trick;
     }
 }

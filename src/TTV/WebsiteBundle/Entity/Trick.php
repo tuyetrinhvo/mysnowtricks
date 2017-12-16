@@ -2,6 +2,7 @@
 
 namespace TTV\WebsiteBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -55,15 +56,6 @@ class Trick
      */
     private $slug;
 
-    /**
-     * @ORM\OneToOne(targetEntity="TTV\WebsiteBundle\Entity\Image", cascade={"persist"})
-     */
-    private $image;
-
-    /**
-     * @ORM\OneToOne(targetEntity="TTV\WebsiteBundle\Entity\Video", cascade={"persist", "remove"})
-     */
-    private $video;
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Category")
@@ -73,13 +65,18 @@ class Trick
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Comment", mappedBy="trick")
+     */
+    private $comments;
 
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -171,53 +168,6 @@ class Trick
         return $this->description;
     }
 
-    /**
-     * Set image
-     *
-     * @param \TTV\WebsiteBundle\Entity\Image $image
-     *
-     * @return Trick
-     */
-    public function setImage(Image $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \TTV\WebsiteBundle\Entity\Image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set video
-     *
-     * @param \TTV\WebsiteBundle\Entity\Video $video
-     *
-     * @return Trick
-     */
-    public function setVideo(Video $video = null)
-    {
-        $this->video = $video;
-
-        return $this;
-    }
-
-    /**
-     * Get video
-     *
-     * @return \TTV\WebsiteBundle\Entity\Video
-     */
-    public function getVideo()
-    {
-        return $this->video;
-    }
 
     /**
      * Set category
@@ -313,5 +263,41 @@ class Trick
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \TTV\WebsiteBundle\Entity\Comment $comment
+     *
+     * @return Trick
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+        
+        $comment->setTrick($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \TTV\WebsiteBundle\Entity\Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
