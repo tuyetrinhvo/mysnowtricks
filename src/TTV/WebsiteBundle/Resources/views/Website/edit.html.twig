@@ -1,1 +1,20 @@
 {% extends "TTVWebsiteBundle::layout.html.twig" %}
+
+{% block title %}
+    Modifier une figure {# {{ trick.name }} #} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h2>Modifier une figure</h2>
+
+    {{ include("TTVWebsiteBundle:Website:form.html.twig") }}
+
+    <p>
+        <a href="{{ path('ttv_website_view', {'id': 3}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à la figure
+        </a>
+    </p>
+
+{% endblock %}

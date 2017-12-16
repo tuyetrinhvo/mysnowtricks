@@ -6,31 +6,31 @@
 
 {% block body %}
 
-    <ul>
+    {#<ul>
         {% for trick in listTricks %}
             <li>{{ trick.name }}</li>
             <li>{{ trick.description }}</li>
 
         {% endfor %}
-    </ul>
+    </ul>#}
 
 
     <!-- All blog posts -->
     <div class="mar-top-lg">
         <ul class="isotope-blog">
             <!-- .blog-post -->
+
             <li class="blog-post wow fadeInUp" data-wow-duration="1s" data-wow-delay=".7s">
-                        <span class="blog-date">
-                          21
-                          <small class="blog-month">jul</small>
+                        <span class="blog-date"><a href="{{ path('ttv_website_edit', {'id': 3}) }}"> <img src="/assets/images/update.png" alt="Modifier"/></a>
+                          <small class="blog-month"><a href="{{ path('ttv_website_delete', {'id': 3}) }}"> <img src="/assets/images/delete.png" alt="Supprimer"/></a></small>
                         </span>
                 <div class="blog-body">
                     <img src="/assets/images/post-1.jpg" alt="post 1" class="img-responsive img-full" />
-                    <h4 class="text-primary text-center text-uppercase">Work</h4>
+                    <h4 class="text-primary text-center text-uppercase">Nom la figure</h4>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do [...]
                     </p>
-                    <a class="btn btn-primary" href="blog-post.html" role="button" title="continue reading"> Read more</a>
+                    <a class="btn btn-primary" href="blog-post.html" role="button" title="continue reading"> En Savoir Plus</a>
                 </div>
             </li>
             <!-- /.blog-post -->
