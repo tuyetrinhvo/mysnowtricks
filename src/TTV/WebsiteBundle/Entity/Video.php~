@@ -29,8 +29,7 @@ class Video
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick", inversedBy="videos")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick")
      */
     private $trick;
     
@@ -67,28 +66,5 @@ class Video
     {
         return $this->url;
     }
-
-    /**
-     * Set trick
-     *
-     * @param \TTV\WebsiteBundle\Entity\Trick $trick
-     *
-     * @return Video
-     */
-    public function setTrick(Trick $trick)
-    {
-        $this->trick = $trick;
-
-        return $this;
-    }
-
-    /**
-     * Get trick
-     *
-     * @return \TTV\WebsiteBundle\Entity\Trick
-     */
-    public function getTrick()
-    {
-        return $this->trick;
-    }
 }
+

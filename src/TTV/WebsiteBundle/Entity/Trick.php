@@ -2,6 +2,7 @@
 
 namespace TTV\WebsiteBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -10,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="trick")
  * @ORM\Entity(repositoryClass="TTV\WebsiteBundle\Repository\TrickRepository")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class Trick
 {
@@ -45,6 +46,11 @@ class Trick
     private $description;
 
     /**
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published = true;
+
+    /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -54,16 +60,6 @@ class Trick
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
-
-    /**
-     * @ORM\OneToOne(targetEntity="TTV\WebsiteBundle\Entity\Image", cascade={"persist"})
-     */
-    private $image;
-
-    /**
-     * @ORM\OneToOne(targetEntity="TTV\WebsiteBundle\Entity\Video", cascade={"persist", "remove"})
-     */
-    private $video;
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Category")
@@ -77,11 +73,49 @@ class Trick
      */
     private $user;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Comment", mappedBy="trick", cascade={"persist", "remove"})
+     */
+    private $comments;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
+     */
+    private $images;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Video", mappedBy="trick", cascade={"persist", "remove"})
+     */
+    private $videos;
+
+    /**
+     * @ORM\Column(name="nb_comments", type="integer")
+     */
+    private $nbComments = 0;
+
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
+    public function increaseComment()
+    {
+        $this->nbComments++;
+    }
+
+    public function decreaseComment()
+    {
+        $this->nbComments--;
+    }
     /**
      * @ORM\PreUpdate
      */
@@ -171,53 +205,6 @@ class Trick
         return $this->description;
     }
 
-    /**
-     * Set image
-     *
-     * @param \TTV\WebsiteBundle\Entity\Image $image
-     *
-     * @return Trick
-     */
-    public function setImage(Image $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \TTV\WebsiteBundle\Entity\Image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set video
-     *
-     * @param \TTV\WebsiteBundle\Entity\Video $video
-     *
-     * @return Trick
-     */
-    public function setVideo(Video $video = null)
-    {
-        $this->video = $video;
-
-        return $this;
-    }
-
-    /**
-     * Get video
-     *
-     * @return \TTV\WebsiteBundle\Entity\Video
-     */
-    public function getVideo()
-    {
-        return $this->video;
-    }
 
     /**
      * Set category
@@ -274,7 +261,7 @@ class Trick
      *
      * @return Trick
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
 
@@ -313,5 +300,161 @@ class Trick
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \TTV\WebsiteBundle\Entity\Comment $comment
+     *
+     * @return Trick
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        $comment->setTrick($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \TTV\WebsiteBundle\Entity\Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return Trick
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * Set nbComments
+     *
+     * @param integer $nbComments
+     *
+     * @return Trick
+     */
+    public function setNbComments($nbComments)
+    {
+        $this->nbComments = $nbComments;
+
+        return $this;
+    }
+
+    /**
+     * Get nbComments
+     *
+     * @return integer
+     */
+    public function getNbComments()
+    {
+        return $this->nbComments;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \TTV\WebsiteBundle\Entity\Image $image
+     *
+     * @return Trick
+     */
+    public function addImage(Image $image)
+    {
+        $image->setTrick($this);
+
+        $this->getImages()->add($image);
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \TTV\WebsiteBundle\Entity\Image $image
+     */
+    public function removeImage(Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Add video
+     *
+     * @param \TTV\WebsiteBundle\Entity\Video $video
+     *
+     * @return Trick
+     */
+    public function addVideo(Video $video)
+    {
+        $video->setTrick($this);
+
+        $this->getVideos()->add($video);
+
+        return $this;
+    }
+
+    /**
+     * Remove video
+     *
+     * @param \TTV\WebsiteBundle\Entity\Video $video
+     */
+    public function removeVideo(Video $video)
+    {
+        $this->videos->removeElement($video);
+    }
+
+    /**
+     * Get videos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVideos()
+    {
+        return $this->videos;
     }
 }
