@@ -7,7 +7,7 @@ ttv_website_homepage:
         page: \d*
 
 ttv_website_view:
-    path:    /figure/{id}
+    path:    /trick/{id}
     defaults:
         _controller: TTVWebsiteBundle:Website:view
         _requirements:
