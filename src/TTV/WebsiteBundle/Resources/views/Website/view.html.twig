@@ -15,12 +15,12 @@
 
     <!-- All blog posts -->
     <div class="mar-top-lg row">
-        <h1 class="text-primary wow fadeInDown text-uppercase text-center"  data-wow-duration="1s" data-wow-delay=".3s">{{ trick.category.name }} : {{ trick.name }} </h1>
+        <h1 class="text-primary wow fadeInDown text-uppercase text-center"  data-wow-duration="1s" data-wow-delay=".3s">Groupe {{ trick.category.name }} : Figure {{ trick.name }} </h1>
         <div class="text-center myseparator">
-            <i class="iline2-round27 text-primary">Ajouté le {{ trick.date|date('d-m-Y') }}</i>
-            <i class="iline2-rectangular22 text-success">{{ trick.nbcomments }} Commentaires</i>
+            <i class="iline2-round27 text-primary">Ajoutée le {{ trick.date|date('d-m-Y') }}</i>
+            <i class="iline2-rectangular22 text-primary">{{ trick.nbcomments }} Commentaires</i>
 
-            <h4 class="media-heading text-primary text-center avatar"> <span class="text-muted"><i> Par </i></span> <img  alt="avatar" src="{{ asset('uploads/avatars/'~trick.user.avatar~'') }}" > {{ trick.user.username }} </h4>
+            <h4 class="media-heading text-primary text-center avatar"> <span class="small text-muted"><i> Ajoutée par </i></span> <img  alt="avatar" src="{{ asset('uploads/avatars/'~trick.user.avatar~'') }}" > {{ trick.user.username }} </h4>
         </div>
 
 
