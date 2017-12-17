@@ -27,7 +27,7 @@ class TrickRepository extends EntityRepository
                     ->andWhere('t.id = :id')
                     ->setParameter('id', $id)
                     ->getQuery();
-        return $query->getResult();
+        return $query->getOneOrNullResult();
 
 
     }

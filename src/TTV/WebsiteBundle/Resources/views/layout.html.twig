@@ -13,8 +13,9 @@
     {% block stylesheets %}
 
         <!-- Bootstrap Core CSS -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css.map" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css" rel="stylesheet" >
         <!-- Theme CSS -->
@@ -106,7 +107,23 @@
     <footer class="page-footer">
         <!-- FOOTER CONTENT -->
         <div class="container">
-            <p>&copy;  TuyetrinhVO {{ 'now'|date('Y') }} </p>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <!-- .social -->
+                    <ul class="social">
+                        <li><a href="#" class="icon-xl iline3-facebook27"></a></li>
+                        <li><a href="#" class="icon-xl iline3-instagram4"></a></li>
+                        <li><a href="#" class="icon-xl iline3-twitter19"></a></li>
+                        <li><a href="#" class="icon-xl iline3-linked3"></a></li>
+                    </ul>
+                    <!-- /.social -->
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                    <p class="col-md-12 text-center">&copy;  TuyetrinhVO {{ 'now'|date('Y') }} </p>
+            </div>
+            <!-- /.row copyright -->
         </div>
         <!-- /.container -->
         <!-- FOOTER CONTENT -->
@@ -128,15 +145,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/npm.js"></script>-->
 
     <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.compatibility.min.js"></script>
 
     <!-- Theme JavaScript -->
     <script src="/assets/js/mysnowtricks.js"></script>
     <script src="/assets/js/libs/jquery-1.11.2.min.js"></script>
-    <script src="/assets/js/libs/jqBootstrapValidation.js"></script>
     <script src="/assets/js/libs/imagesloaded.pkgd.min.js"></script>
     <script src="/assets/js/libs/imagesloaded.js"></script>
     <script src="/assets/js/libs/jquery.magnific-popup.min.js"></script>
