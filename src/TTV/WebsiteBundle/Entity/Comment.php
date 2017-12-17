@@ -38,7 +38,6 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
 

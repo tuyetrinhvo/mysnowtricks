@@ -15,62 +15,35 @@
 
     <!-- All blog posts -->
     <div class="mar-top-lg row">
+        <h1 class="text-primary wow fadeInDown text-uppercase text-center"  data-wow-duration="1s" data-wow-delay=".3s">Category : Nom de la figure</h1>
+        <div class="text-center myseparator">
+            <i class="text-muted align-center mar-bottom-sm"> Auteur : </i>
+            <i class="iline2-round27 text-primary"></i> <a href="#">April 17, 2015</a>
+            <i class="iline2-rectangular22 text-success"></i> <a href="#">30 Comments</a>
+        </div>
+
         <!-- Left part -->
         <div class="col-md-12 blog-main">
             <div class="post-detail sep-bottom-lg">
+
                 <figure class="no-margin">
-                    <img src="/uploads/tricks/grab-tail-grab.jpg" alt="grab-tail-grab" class="img-responsive" />
+                    <img src="{{ asset('uploads/tricks/'~trick.images[0].extension~'') }}" alt="{{ trick.images[0].alt }}"class="img-responsive" />
                 </figure>
+                {# <div class="row col-md-12">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="{{ trick.videos[0].url }}" allowfullscreen></iframe>
+                    </div>
+                </div> #}
+
                 <div class="post-detail-body sep-xs">
-                    <h3 class="text-uppercase">Nom de la figure</h3>
+                    <h3 class="text-uppercase">{{ trick.name }}</h3>
                     <span class="line-sep-gray"></span>
                     <p>
-                        <span class="letter-dropcap"> L</span>
-                        orem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit
-                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                        occaecat cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.
+                        {{ trick.description }}
                     </p>
-                    <p>
-                        <<img src="/uploads/tricks/grab-tail-grab.jpg" alt="grab-tail-grab" class="alignleft" width="200"/>
-                        Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.
-                        Nullam varius, turpis et commodo pharetra, est eros bibendum elit,
-                        nec luctus magna felis sollicitudin mauris. Integer in mauris
-                        eu nibh euismod gravida. Duis ac tellus et risus vulputate
-                        vehicula. Donec lobortis risus a elit. Etiam tempor. Ut
-                        ullamcorper, ligula eu tempor congue, eros est euismod turpis,
-                        id tincidunt sapien risus a quam. Maecenas fermentum consequat
-                        mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.
-                    </p>
-                    <blockquote>
-                        <p>
-                            <i>
-                                Integer in mauris
-                                eu nibh euismod gravida. Duis ac tellus et risus vulputate
-                                vehicula. Donec lobortis risus a elit. Etiam tempor. Ut
-                                ullamcorper, ligula eu tempor congue, eros est euismod turpis,
-                                id tincidunt sapien risus a quam. Maecenas fermentum consequat
-                                mi. Donec fermentum.
-                            </i></p>
-                    </blockquote>
-                    <p>
-                        Fusce convallis, mauris imperdiet gravida bibendum, nisl
-                        turpis suscipit mauris, sed placerat ipsum urna sed risus.
-                        In convallis tellus a mauris. Curabitur non elit ut libero
-                        tristique sodales. Mauris a lacus. Donec mattis semper leo.
-                        In hac habitasse platea dictumst. Vivamus facilisis diam at
-                        odio. Mauris dictum, nisi eget consequat elementum, lacus
-                        ligula molestie metus, non feugiat orci magna ac sem. Donec
-                        turpis. Donec vitae metus. Morbi tristique neque eu mauris.
-                        Quisque gravida ipsum non sapien. Proin turpis lacus, scelerisque
-                        vitae, elementum at, lobortis ac, quam. Aliquam dictum eleifend
-                        risus. In hac habitasse platea dictumst. Etiam sit amet diam.
-                        Suspendisse odio. Suspendisse nunc. In semper bibendum libero.
-                    </p>
+                   <p>
+
+                   </p>
 
                 </div>
             </div>
@@ -169,16 +142,16 @@
                 <a href="blog-post-gallery.html" class="text-uppercase pull-left" ><i class="iline1-arrowhead2"></i> Figure Précédente </a>
                 <a href="blog-post-carousel.html" class="text-uppercase pull-right" >Figure Suivante <i class="iline1-chevron15"></i></a>
             </div> <!-- /nav-links -->
-            <div>
+            <div class="text-center">
                 <a href="{{ path('ttv_website_homepage') }}" class="btn btn-default">
                     <i class="glyphicon glyphicon-chevron-left"></i>
                     Retour à la liste des figures
                 </a>
-                <a href="{{ path('ttv_website_edit', {'id': 3}) }}" class="btn btn-default">
+                <a href="{{ path('ttv_website_edit', {'id': trick.id }) }}" class="btn btn-default">
                     <i class="glyphicon glyphicon-edit"></i>
                     Modifier la figure
                 </a>
-                <a href="{{ path('ttv_website_delete', {'id': 3}) }}" class="btn btn-danger">
+                <a href="{{ path('ttv_website_delete', {'id': trick.id }) }}" class="btn btn-danger">
                     <i class="glyphicon glyphicon-trash"></i>
                     Supprimer la figure
                 </a>

@@ -4,7 +4,7 @@ ttv_website_homepage:
         _controller: TTVWebsiteBundle:Website:index
         page: 1
     requirements:
-        page: \d*
+        page: \d+
 
 ttv_website_view:
     path:    /trick/{id}

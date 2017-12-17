@@ -4,6 +4,7 @@ namespace TTV\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="TTV\UserBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -48,9 +49,9 @@ class User
     /**
      * @var array
      *
-     * @ORM\Column(name="role", type="array")
+     * @ORM\Column(name="roles", type="array")
      */
-    private $role;
+    private $roles;
 
     /**
      * @var string
@@ -73,6 +74,11 @@ class User
     private $file;
 
     private $tempFilename;
+
+    public function eraseCredentials()
+    {
+
+    }
 
     /**
      * Get id
@@ -163,9 +169,9 @@ class User
      *
      * @return User
      */
-    public function setRole($role)
+    public function setRoles($roles)
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -175,9 +181,9 @@ class User
      *
      * @return array
      */
-    public function getRole()
+    public function getRoles()
     {
-        return $this->role;
+        return $this->roles;
     }
 
 
