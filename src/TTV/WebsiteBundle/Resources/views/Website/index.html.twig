@@ -8,18 +8,21 @@
 
     <!-- All blog posts -->
     <div class="mar-top-lg">
-        <ul class="isotope-blog row">
+        <ul class="isotope-blog">
             <!-- .blog-post -->
         {% for trick in listTricks %}
             <li class="blog-post wow fadeInUp col-md-3 col-sm-3" data-wow-duration="1s" data-wow-delay=".7s">
-                        <span class="blog-date"><a href="{{ path('ttv_website_edit', {'id': 3}) }}"> <img src="/assets/images/update.png" alt="Modifier"/></a>
-                          <small class="blog-month"><a href="{{ path('ttv_website_delete', {'id': 3}) }}"> <img src="/assets/images/delete.png" alt="Supprimer"/></a></small>
+                        <span class="blog-date"><a href="{{ path('ttv_website_edit', {'id': trick.id }) }}"> <img src="/assets/images/update.png" alt="Modifier"/></a>
+                          <small class="blog-month"><a href="{{ path('ttv_website_delete', {'id': trick.id }) }}"> <img src="/assets/images/delete.png" alt="Supprimer"/></a></small>
                         </span>
                 <div class="blog-body">
                     <img src="{{ asset('uploads/tricks/'~trick.images[0].extension~'') }}" alt="{{ trick.images[0].alt }}" class="img-responsive img-full" />
                     <h4 class="text-primary text-center text-uppercase">{{ trick.name }}</h4>
+                    <p class="text-center">
+                        <i class="text-primary"> Auteur : {{ trick.user.username }} </i>
+                    </p>
                     <p>
-                        {{ trick.description }}
+                        {{ trick.description | slice(0,100) ~ ' ...' }}
                     </p>
                     <a class="btn btn-primary" href="{{ path('ttv_website_view', {'id': trick.id })}}" role="button" title="continue reading"> En Savoir Plus</a>
                 </div>
@@ -29,7 +32,7 @@
         </ul>
 
         <!-- .navigation -->
-        <nav class="navigation paging-navigation col-md-12">
+        <nav class="navigation paging-navigation col-md-12 col-sm-12">
             <ul class="page-numbers pagination">
                 {% for p in range (1, nbPages) %}
                 <li{% if p == page %} class="current" {% endif %}>

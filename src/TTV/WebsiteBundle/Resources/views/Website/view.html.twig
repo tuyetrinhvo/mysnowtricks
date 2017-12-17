@@ -15,12 +15,14 @@
 
     <!-- All blog posts -->
     <div class="mar-top-lg row">
-        <h1 class="text-primary wow fadeInDown text-uppercase text-center"  data-wow-duration="1s" data-wow-delay=".3s">Category : Nom de la figure</h1>
+        <h1 class="text-primary wow fadeInDown text-uppercase text-center"  data-wow-duration="1s" data-wow-delay=".3s">{{ trick.category.name }} : {{ trick.name }} </h1>
         <div class="text-center myseparator">
-            <i class="text-muted align-center mar-bottom-sm"> Auteur : </i>
-            <i class="iline2-round27 text-primary"></i> <a href="#">April 17, 2015</a>
-            <i class="iline2-rectangular22 text-success"></i> <a href="#">30 Comments</a>
+            <i class="iline2-round27 text-primary">Ajouté le {{ trick.date|date('d-m-Y') }}</i>
+            <i class="iline2-rectangular22 text-success">{{ trick.nbcomments }} Commentaires</i>
+
+            <h4 class="media-heading text-primary text-center avatar"> <span class="text-muted"><i> Par </i></span> <img  alt="avatar" src="{{ asset('uploads/avatars/'~trick.user.avatar~'') }}" > {{ trick.user.username }} </h4>
         </div>
+
 
         <!-- Left part -->
         <div class="col-md-12 blog-main">
@@ -50,77 +52,40 @@
             <div class="post-detail mar-top-xs">
                 <div class="post-detail-body sep-xs">
                     <h3>Commentaires</h3>
-                    <span class="line-sep-gray"></span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
                     <ul class="media-list">
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" alt="64x64" src="/uploads/avatars/profil-02.png" data-holder-rendered="true" />
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading text-primary">John Doe <span class="pull-right small text-muted"><i>1h ago</i></span></h4>
-                                <p>
-                                    Cras sit amet nibh libero, in gravida nulla.
-                                    Nulla vel metus scelerisque ante sollicitudin commodo.
-                                    Cras purus odio, vestibulum in vulputate at, tempus
-                                    viverra turpis.
-                                </p>
-                            </div>
-                        </li>
+                    {% for comment in listComments %}
                         <!-- Nested media object -->
                         <li class="media">
                             <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" alt="64x64" src="/uploads/avatars/profil-01.png" data-holder-rendered="true" />
-                                </a>
+
+                                    <img class="media-object" alt="64x64" src="{{ asset('uploads/avatars/'~comment.user.avatar~'') }}" data-holder-rendered="true" />
+
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading text-primary">Jule Doe <span class="pull-right small text-muted"><i>2h ago</i></span></h4>
+                                <h4 class="media-heading text-primary">{{ comment.user.username }} <span class="pull-right small text-muted"><i> Le {{ comment.date|date ('d-m-Y')}}</i></span></h4>
                                 <p>
-                                    Cras sit amet nibh libero, in gravida nulla.
-                                    Nulla vel metus scelerisque ante sollicitudin commodo.
-                                    Cras purus odio, vestibulum in vulputate at, tempus
-                                    viverra turpis.
+                                    {{ comment.content }}
                                 </p>
                             </div>
                         </li>
-                        <!-- Nested media object -->
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" alt="64x64" src="/uploads/avatars/profil-02.png" data-holder-rendered="true" />
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading text-primary">Jihn Doe <span class="pull-right small text-muted"><i>3h ago</i></span></h4>
-                                <p>
-                                    Cras sit amet nibh libero, in gravida nulla.
-                                    Nulla vel metus scelerisque ante sollicitudin commodo.
-                                    Cras purus odio, vestibulum in vulputate at, tempus
-                                    viverra turpis.
-                                </p>
-                            </div>
-                        </li>
-                        <!-- Nested media object -->
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" alt="64x64" src="/uploads/avatars/profil-01.png" data-holder-rendered="true" />
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading text-primary">Jane Doe <span class="pull-right small text-muted"><i>4h ago</i></span></h4>
-                                <p>
-                                    Cras sit amet nibh libero, in gravida nulla.
-                                    Nulla vel metus scelerisque ante sollicitudin commodo.
-                                    Cras purus odio, vestibulum in vulputate at,
-                                    tempus viverra turpis.
-                                </p>
-                            </div>
-                        </li>
+                        {% endfor %}
                     </ul>
+
+                    <!-- .navigation -->
+                    {% if listComments|length > 0 %}
+                    <nav class="navigation paging-navigation col-md-12">
+                        <ul class="page-numbers pagination">
+                            {% for p in range (1, nbPages) %}
+                                <li{% if p == page %} class="current" {% endif %}>
+                                    <a class="page-numbers pagination" href="{{ path('ttv_website_view', {'id':trick.id, 'page' : p}) }}">{{ p }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                    <!-- /.navigation -->
+
                     <h4 class="mar-top-md">Rédiger un commentaire</h4>
                     <span class="line-sep-gray"></span>
 

@@ -17,7 +17,7 @@ class WebsiteController extends Controller
             throw new NotFoundHttpException("La page .$page. n'existe pas !");
         }
 
-        $nbPerPage = 10;
+        $nbPerPage = 4;
 
         $listTricks = $this->getDoctrine()
             ->getManager()
@@ -37,7 +37,7 @@ class WebsiteController extends Controller
         ]);
     }
 
-    public function viewAction($id)
+    public function viewAction($id, $page, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $trick = $em->getRepository('TTVWebsiteBundle:Trick')->getTrick($id);
@@ -45,10 +45,15 @@ class WebsiteController extends Controller
         if (null === $trick){
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
         }
-        // $listComments = $em ->getRepository('TTVWebsiteBundle:Comment')->getCommentsByTrick($trick, $page, $nbPerPage);
+
+        $nbPerPage = 3;
+
+        $listComments = $em ->getRepository('TTVWebsiteBundle:Comment')->getCommentsByTrick($trick, $page, $nbPerPage);
+
+        $nbPages = ceil(count($listComments) / $nbPerPage);
 
 
-        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick]);
+        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, ]);
     }
 
     public function addAction(Request $request)

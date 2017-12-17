@@ -7,11 +7,12 @@ ttv_website_homepage:
         page: \d+
 
 ttv_website_view:
-    path:    /trick/{id}
+    path:    /trick/{id}/{page}
     defaults:
         _controller: TTVWebsiteBundle:Website:view
-        _requirements:
-            id: \d+
+        page: 1
+    requirements:
+        id: \d+
 
 ttv_website_add:
     path:    /add
