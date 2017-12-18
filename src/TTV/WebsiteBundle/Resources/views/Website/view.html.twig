@@ -18,6 +18,9 @@
         <h1 class="text-primary wow fadeInDown text-uppercase text-center"  data-wow-duration="1s" data-wow-delay=".3s">Groupe {{ trick.category.name }} : Figure {{ trick.name }} </h1>
         <div class="text-center myseparator">
             <i class="iline2-round27 text-primary">Ajoutée le {{ trick.date|date('d-m-Y') }}</i>
+            {% if trick.updatedAt is not null %}
+            <i class="iline2-round27 text-success">Modifiée le {{ trick.updatedAt|date('d-m-Y') }}</i>
+            {% endif %}
             <i class="iline2-rectangular22 text-primary">{{ trick.nbcomments }} Commentaires</i>
 
             <h4 class="media-heading text-primary text-center avatar"> <span class="small text-muted"><i> Ajoutée par </i></span>{% if trick.user.avatar is not null %} <img  alt="avatar" src="{{ asset('uploads/avatars/'~trick.user.avatar~'') }}" > {% endif %}{{ trick.user.username }} </h4>

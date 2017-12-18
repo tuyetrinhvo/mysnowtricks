@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use TTV\WebsiteBundle\Entity\Trick;
+use TTV\WebsiteBundle\Form\TrickType;
 
 class WebsiteController extends Controller
 {
@@ -58,16 +60,22 @@ class WebsiteController extends Controller
 
     public function addAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $trick = new Trick();
 
-        if ($request->isMethod('POST')){
+        $form = $this ->get('form.factory')->create(TrickType::class, $trick);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($trick);
+            $em->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'La nouvelle figure est bien ajoutée !');
 
             return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId()]);
         }
 
-        return $this->render('TTVWebsiteBundle:Website:add.html.twig');
+        return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['form' => $form->createView()]);
     }
 
     public function editAction($id, Request $request)
@@ -80,17 +88,21 @@ class WebsiteController extends Controller
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
         }
 
-        if ($request->isMethod('POST')){
+        $form = $this ->createForm(TrickType::class, $trick);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+
+            $em->flush();
 
             $request->getSession()->getFlashBag()->add ('info', 'La figure est bien modifiée !');
 
             return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId()]);
         }
 
-        return $this->render('TTVWebsiteBundle:Website:edit.html.twig', ['trick' => $trick]);
+        return $this->render('TTVWebsiteBundle:Website:edit.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
     }
 
-    public function deleteAction($id)
+    public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -99,6 +111,18 @@ class WebsiteController extends Controller
         if (null === $trick){
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
         }
-        return $this->render('TTVWebsiteBundle:Website:delete.html.twig');
+
+        $form = $this -> get('form.factory')->create();
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->remove($trick);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', 'La figure a été bien supprimée !');
+
+            return $this->redirectToRoute('ttv_website_homepage');
+        }
+
+        return $this->render('TTVWebsiteBundle:Website:delete.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
     }
 }
