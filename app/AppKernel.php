@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new TTV\WebsiteBundle\TTVWebsiteBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new TTV\UserBundle\TTVUserBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

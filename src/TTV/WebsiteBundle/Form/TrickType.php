@@ -19,20 +19,26 @@ class TrickType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class)
+        $builder->add('name', TextType::class, [
+                    'label'         => 'Figure',
+                    'attr'          => ['placeholder' => 'Saisissez le nom de la figure', 'autofocus' => true]])
                 ->add('description', TextareaType::class)
                 ->add('images', CollectionType::class, [
                     'entry_type'    => ImageType::class,
                     'allow_add'     => true,
                     'allow_delete'  => true,
                     'required'      => false])
-                ->add('videos', EntityType::class, [
-                    'class'         => 'TTV\WebsiteBundle\Entity\Video',
-                    'choice_label'  => 'url'])
+                ->add('videos', CollectionType::class, [
+                    'entry_type'    => VideoType::class,
+                    'allow_add'     => true,
+                    'allow_delete'  => true,
+                    'required'      => false])
                 ->add('category', EntityType::class, [
                     'class'         => 'TTV\WebsiteBundle\Entity\Category',
                     'choice_label'  => 'name',
-                    'multiple'      => false])
+                    'expanded'      => false,
+                    'multiple'      => false,
+                    'label'         => 'Groupe'])
                 ->add('ajouter', SubmitType::class);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
