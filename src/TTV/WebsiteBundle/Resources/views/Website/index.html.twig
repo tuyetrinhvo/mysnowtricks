@@ -15,8 +15,8 @@
                         <span class="blog-date"><a href="{{ path('ttv_website_edit', {'id': trick.id }) }}"> <img src="/assets/images/update.png" alt="Modifier"/></a>
                           <small class="blog-month"><a href="{{ path('ttv_website_delete', {'id': trick.id }) }}"> <img src="/assets/images/delete.png" alt="Supprimer"/></a></small>
                         </span>
-                <div class="blog-body">
-                    <img src="{{ asset('uploads/tricks/'~trick.images[0].extension~'') }}" alt="{{ trick.images[0].alt }}" class="img-responsive img-full" />
+                <div class="blog-body">{% if trick.images is not empty %}
+                    <img src="{{ asset('uploads/tricks/'~trick.images[0].extension~'') }}" alt="{{ trick.images[0].alt }}" class="img-responsive img-full" />{% endif %}
                     <h4 class="text-primary text-center text-uppercase">{{ trick.name }}</h4>
                     <p class="text-center">
                         <i class="text-primary"> Auteur : {{ trick.user.username }} </i>
