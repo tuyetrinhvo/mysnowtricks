@@ -1,7 +1,7 @@
 {% extends "TTVWebsiteBundle::layout.html.twig" %}
 
 {% block title %}
-    {# {{ trick.name }} #} - {{ parent() }}
+    Afficher figure {{ trick.name }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -18,25 +18,34 @@
         <h1 class="text-primary wow fadeInDown text-uppercase text-center"  data-wow-duration="1s" data-wow-delay=".3s">Groupe {{ trick.category.name }} : Figure {{ trick.name }} </h1>
         <div class="text-center myseparator">
             <i class="iline2-round27 text-primary">Ajoutée le {{ trick.date|date('d-m-Y') }}</i>
+            {% if trick.updatedAt is not null %}
+            <i class="iline2-round27 text-success">Modifiée le {{ trick.updatedAt|date('d-m-Y') }}</i>
+            {% endif %}
             <i class="iline2-rectangular22 text-primary">{{ trick.nbcomments }} Commentaires</i>
 
-            <h4 class="media-heading text-primary text-center avatar"> <span class="small text-muted"><i> Ajoutée par </i></span> <img  alt="avatar" src="{{ asset('uploads/avatars/'~trick.user.avatar~'') }}" > {{ trick.user.username }} </h4>
+            <h4 class="media-heading text-primary text-center avatar"> <span class="small text-muted"><i> Ajoutée par </i></span>{% if trick.user.avatar is not null %} <img  alt="avatar" src="{{ asset('uploads/avatars/'~trick.user.avatar~'') }}" > {% endif %}{{ trick.user.username }} </h4>
         </div>
 
 
         <!-- Left part -->
         <div class="col-md-12 blog-main">
             <div class="post-detail sep-bottom-lg">
-
-                <figure class="no-margin">
-                    <img src="{{ asset('uploads/tricks/'~trick.images[0].extension~'') }}" alt="{{ trick.images[0].alt }}"class="img-responsive" />
-                </figure>
-                {# <div class="row col-md-12">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe src="{{ trick.videos[0].url }}" allowfullscreen></iframe>
+                {% if trick.images is not empty %}
+                    {% for image in trick.images %}
+                    <figure class="no-margin">
+                        <img src="{{ asset('uploads/tricks/'~image.extension~'') }}" alt="{{ image.alt }}"class="img-responsive" />
+                    </figure>
+                    {% endfor %}
+                 {% endif %}
+                {% if trick.videos is not empty %}
+                    {% for video in trick.videos %}
+                    <div class="row col-md-12">
+                        <div class="embed-responsive embed-responsive-16by9  myseparator">
+                            <iframe src="{{ video.url }}" allowfullscreen frameborder="0"></iframe>
+                        </div>
                     </div>
-                </div> #}
-
+                    {% endfor %}
+                {% endif %}
                 <div class="post-detail-body sep-xs">
                     <h3 class="text-uppercase">{{ trick.name }}</h3>
                     <span class="line-sep-gray"></span>
@@ -58,9 +67,9 @@
                         <!-- Nested media object -->
                         <li class="media">
                             <div class="media-left">
-
-                                    <img class="media-object" alt="64x64" src="{{ asset('uploads/avatars/'~comment.user.avatar~'') }}" data-holder-rendered="true" />
-
+                            {% if comment.user.avatar is not null %}
+                                <img class="media-object" alt="64x64" src="{{ asset('uploads/avatars/'~comment.user.avatar~'') }}" data-holder-rendered="true" />
+                            {% endif %}
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading text-primary">{{ comment.user.username }} <span class="pull-right small text-muted"><i> Le {{ comment.date|date ('d-m-Y')}}</i></span></h4>

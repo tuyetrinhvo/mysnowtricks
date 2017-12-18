@@ -25,11 +25,23 @@ class LoadTrick implements FixtureInterface
         $category3->setName('Flip');
         $category4 = new Category();
         $category4->setName('Slide');
+        $category5 = new Category();
+        $category5->setName('Manière de rider');
+        $category6 = new Category();
+        $category6->setName('Rotation désaxée');
+        $category7 = new Category();
+        $category7->setName('One foot trick');
+        $category8 = new Category();
+        $category8->setName('Old school');
 
         $manager->persist($category1);
         $manager->persist($category2);
         $manager->persist($category3);
         $manager->persist($category4);
+        $manager->persist($category5);
+        $manager->persist($category6);
+        $manager->persist($category7);
+        $manager->persist($category8);
 
         $user1 = new User();
         $user1->setUsername('Mai');

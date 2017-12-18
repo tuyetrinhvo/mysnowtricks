@@ -123,7 +123,7 @@ class Image
      * Set File
      * @param UploadedFile $file
      */
-    public function setFile(UploadedFile $file)
+    public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
         if(null !== $this ->extension){

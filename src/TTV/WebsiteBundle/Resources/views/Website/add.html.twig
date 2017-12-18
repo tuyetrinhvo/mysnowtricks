@@ -1,1 +1,11 @@
 {% extends "TTVWebsiteBundle::layout.html.twig" %}
+
+{% block title %}
+    Ajouter une figure - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h3>Ajouter une figure</h3>
+
+    {{ include("TTVWebsiteBundle:Website:form.html.twig") }}
+{% endblock %}

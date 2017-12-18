@@ -31,6 +31,7 @@ class TrickRepository extends EntityRepository
 
 
     }
+
     public function getAllTricks($page, $nbPerPage)
     {
         $query = $this  ->createQueryBuilder('t')
@@ -66,7 +67,7 @@ class TrickRepository extends EntityRepository
     public function getNextTrick($currentId)
     {
         $query = $this  ->createQueryBuilder('t')
-                        ->where('t.id > :$currentId')
+                        ->where('t.id > :currentId')
                         ->setParameter(':currentId', $currentId)
                         ->orderBy('t.id', 'ASC')
                         ->setFirstResult(0)
