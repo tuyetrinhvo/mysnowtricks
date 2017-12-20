@@ -103,7 +103,7 @@ class WebsiteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $trick = $em ->getRepository('TTVWebsiteBundle:Trick')->find($id);
+        $trick = $em ->getRepository('TTVWebsiteBundle:Trick')->getTrick($id);
 
         if (null === $trick){
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
