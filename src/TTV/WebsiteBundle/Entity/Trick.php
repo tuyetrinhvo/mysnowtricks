@@ -49,7 +49,7 @@ class Trick
      * @ORM\Column(name="description", type="text")
      * @Assert\NotBlank()
      * @Assert\Length(
-     *     min=10, minMessage="La description doit faire au moins {{ limit }} caractères."
+     *     min=10, minMessage="La description doit faire au moins {{ limit }} caractères.",
      *     max=8000, maxMessage="La description ne doit pas dépasser {{ limit }} caractères.")
      */
     private $description;
