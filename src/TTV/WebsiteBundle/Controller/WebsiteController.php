@@ -2,9 +2,8 @@
 
 namespace TTV\WebsiteBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TTV\WebsiteBundle\Entity\Comment;
@@ -79,6 +78,11 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView()]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
     public function addAction(Request $request)
     {
         $trick = new Trick();
@@ -99,11 +103,17 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['form' => $form->createView()]);
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
     public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $trick = $em ->getRepository('TTVWebsiteBundle:Trick')->find($id);
+        $trick = $em ->getRepository('TTVWebsiteBundle:Trick')->getTrick($id);
 
         if (null === $trick){
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
@@ -123,6 +133,12 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:edit.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
+     */
     public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();

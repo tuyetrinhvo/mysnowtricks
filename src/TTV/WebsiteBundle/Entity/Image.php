@@ -40,7 +40,7 @@ class Image
 
     /**
      * @var UploadedFile
-     * @Assert\Image
+     * @Assert\Image(maxSize="1M", maxSizeMessage="L'image ne doit pas dépasser 1M.")
      */
     private $file;
 

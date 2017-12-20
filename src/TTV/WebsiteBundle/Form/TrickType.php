@@ -39,7 +39,7 @@ class TrickType extends AbstractType
                     'expanded'      => false,
                     'multiple'      => false,
                     'label'         => 'Groupe'])
-                ->add('ajouter', SubmitType::class);
+                ->add('envoyer', SubmitType::class);
 
         /*$builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
             $trick = $event->getData();

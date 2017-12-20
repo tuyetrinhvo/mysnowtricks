@@ -3,12 +3,14 @@
 namespace TTV\WebsiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Video
  *
  * @ORM\Table(name="video")
  * @ORM\Entity(repositoryClass="TTV\WebsiteBundle\Repository\VideoRepository")
+ * @UniqueEntity(fields={"url"}, message="Une vidéo existe déjà avec ce lien")
  */
 class Video
 {
@@ -24,7 +26,7 @@ class Video
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="url", type="string", length=255, unique=true)
      */
     private $url;
 

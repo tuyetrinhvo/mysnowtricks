@@ -3,6 +3,7 @@
 namespace TTV\WebsiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comment
@@ -26,6 +27,7 @@ class Comment
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\DateTime()
      */
     private $date;
 
@@ -33,17 +35,23 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min="4", minMessage="Le commentaire doit faire au moins {{ limit }} caractères.",
+     *     max="1000", maxMessage="Le commentaire ne doit pas dépasser {{ limit }} caractères.")
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick", inversedBy="comments")
+     * @Assert\Valid()
      */
     private $trick;
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $user;
 
