@@ -71,6 +71,7 @@
                     <i class="glyphicon glyphicon-chevron-left"></i>
                     Retour à la liste des figures
                 </a>
+                {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('ttv_website_edit', {'id': trick.id }) }}" class="btn btn-primary btn-md">
                     <i class="glyphicon glyphicon-edit"></i>
                     Modifier la figure
@@ -79,13 +80,14 @@
                     <i class="glyphicon glyphicon-trash"></i>
                     Supprimer la figure
                 </a>
+                {% endif %}
             </div> <!-- /.text-center -->
 
             <!-- COmmentaires -->
             <div class="post-detail mar-top-xs">
                 <div class="post-detail-body sep-xs">
                     <h3>Commentaires</h3>
-
+                    {% if listComments is not empty %}
                     <ul class="media-list">
                     {% for comment in listComments %}
                         <!-- Nested media object -->
@@ -104,6 +106,9 @@
                         </li>
                         {% endfor %}
                     </ul>
+                        {% else %}
+                        <p>Aucun commentaire pour le moment.<br/>Soyez la première personne à écrire un commentaire sur cette figure.<br/>Pour le faire, identifiez-vous !</p>
+                    {% endif %}
 
                     <!-- .navigation -->
                     {% if listComments|length > 0 %}
@@ -118,7 +123,7 @@
                     </nav>
                     {% endif %}
                     <!-- /.navigation -->
-
+                    {% if is_granted('ROLE_USER') %}
                     <h4 class="mar-top-md">Rédiger un commentaire</h4>
                     <span class="line-sep-gray"></span>
 
@@ -129,6 +134,7 @@
                             </div>
                         <!-- /.row -->
                     </div>
+                    {% endif %}
                 </div>
             </div>
 

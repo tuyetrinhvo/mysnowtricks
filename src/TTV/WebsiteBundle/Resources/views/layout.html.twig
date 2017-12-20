@@ -64,7 +64,9 @@
                     <li><a  href="{{ path('ttv_website_homepage') }}">Accueil</a></li>
                     <li><a  href="{{ path('login') }}">Connexion</a></li>
                     <li><a  href="{{ path('login_check') }}">Inscription</a></li>
+                    {% if is_granted('ROLE_USER') %}
                     <li><a  href="{{ path('ttv_website_add') }}">Ajouter une figure</a></li>
+                    {% endif %}
                 </ul>
 
             </div><!-- /.navbar-collapse -->
