@@ -7,7 +7,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use TTV\WebsiteBundle\Entity\Comment;
 use TTV\WebsiteBundle\Entity\Trick;
+use TTV\WebsiteBundle\Form\CommentType;
 use TTV\WebsiteBundle\Form\TrickType;
 
 class WebsiteController extends Controller
@@ -19,7 +21,7 @@ class WebsiteController extends Controller
             throw new NotFoundHttpException("La page .$page. n'existe pas !");
         }
 
-        $nbPerPage = 4;
+        $nbPerPage = 6;
 
         $listTricks = $this->getDoctrine()
             ->getManager()
@@ -43,6 +45,8 @@ class WebsiteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $trick = $em->getRepository('TTVWebsiteBundle:Trick')->getTrick($id);
+        $previousTrick = $em->getRepository('TTVWebsiteBundle:Trick')->getPreviousTrick($id);
+        $nextTrick = $em->getRepository('TTVWebsiteBundle:Trick')->getNextTrick($id);
 
         if (null === $trick){
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
@@ -54,8 +58,25 @@ class WebsiteController extends Controller
 
         $nbPages = ceil(count($listComments) / $nbPerPage);
 
+        $comment = new Comment();
 
-        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, ]);
+        $form = $this->get('form.factory')->create(CommentType::class, $comment);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+
+            $em = $this->getDoctrine()->getManager();
+            $trick->addComment($comment);
+            $user = $this->getUser();
+            $comment->setUser($user);
+            $em->persist($comment);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', 'Le commentaire est bien ajouté !');
+
+            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId()]);
+        }
+
+        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView()]);
     }
 
     public function addAction(Request $request)

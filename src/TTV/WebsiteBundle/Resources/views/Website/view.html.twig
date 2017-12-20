@@ -58,6 +58,30 @@
 
                 </div>
             </div>
+            <div class="nav-links mar-top-md">
+                {% if previousTrick is not null %}
+                <a href="{{ path('ttv_website_view', {'id': previousTrick.id }) }}" class="text-uppercase pull-left" ><i class="iline1-arrowhead2"></i> Figure Précédente</a>
+                    {% endif %}
+                    {% if nextTrick is not null %}
+                        <a href="{{ path('ttv_website_view', {'id': nextTrick.id })}}" class="text-uppercase pull-right" >Figure Suivante <i class="iline1-chevron15"></i></a>
+                    {% endif %}
+            </div> <!-- /nav-links -->
+            <div class="text-center">
+                <a href="{{ path('ttv_website_homepage') }}" class="btn btn-primary btn-md">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Retour à la liste des figures
+                </a>
+                <a href="{{ path('ttv_website_edit', {'id': trick.id }) }}" class="btn btn-primary btn-md">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    Modifier la figure
+                </a>
+                <a href="{{ path('ttv_website_delete', {'id': trick.id }) }}" class="btn btn-danger btn-md">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    Supprimer la figure
+                </a>
+            </div> <!-- /.text-center -->
+
+            <!-- COmmentaires -->
             <div class="post-detail mar-top-xs">
                 <div class="post-detail-body sep-xs">
                     <h3>Commentaires</h3>
@@ -98,38 +122,16 @@
                     <h4 class="mar-top-md">Rédiger un commentaire</h4>
                     <span class="line-sep-gray"></span>
 
-                    <form class="form-horizontal mar-top-sm wow fadeIn"  data-wow-duration="1s" data-wow-delay=".3s" method="post" action="/" name="commentForm" novalidate="">
+                    <div class="form-horizontal mar-top-sm wow fadeIn"  data-wow-duration="1s" data-wow-delay=".3s" >
                         <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="form-group control-group">
-                                    <textarea class="form-control" name="comment" placeholder="Commentaire* :" required="" data-validation-required-message="Please enter a Text."></textarea>
-                                    <p class="help-block"></p>
-                                </div>
-                                <button type="submit" class="submit btn btn-primary pull-right" >Envoyer</button>
+                            <div class="col-md-12 col-sm-12 nolabel">
+                                {{ form(form) }}
                             </div>
-                        </div>
                         <!-- /.row -->
-                    </form>
+                    </div>
                 </div>
             </div>
-            <div class="nav-links mar-top-md">
-                <a href="blog-post-gallery.html" class="text-uppercase pull-left" ><i class="iline1-arrowhead2"></i> Figure Précédente </a>
-                <a href="blog-post-carousel.html" class="text-uppercase pull-right" >Figure Suivante <i class="iline1-chevron15"></i></a>
-            </div> <!-- /nav-links -->
-            <div class="text-center">
-                <a href="{{ path('ttv_website_homepage') }}" class="btn btn-default">
-                    <i class="glyphicon glyphicon-chevron-left"></i>
-                    Retour à la liste des figures
-                </a>
-                <a href="{{ path('ttv_website_edit', {'id': trick.id }) }}" class="btn btn-default">
-                    <i class="glyphicon glyphicon-edit"></i>
-                    Modifier la figure
-                </a>
-                <a href="{{ path('ttv_website_delete', {'id': trick.id }) }}" class="btn btn-danger">
-                    <i class="glyphicon glyphicon-trash"></i>
-                    Supprimer la figure
-                </a>
-            </div> <!-- / -->
+
         </div>
         <!-- /Left part -->
     </div>

@@ -41,7 +41,7 @@ class TrickType extends AbstractType
                     'label'         => 'Groupe'])
                 ->add('ajouter', SubmitType::class);
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
+        /*$builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
             $trick = $event->getData();
 
             if (null === $trick){ return; }
@@ -49,7 +49,7 @@ class TrickType extends AbstractType
                 $event->getForm()->add('published', CheckboxType::class, ['required' => false]);
             } else {
                 $event->getForm()->remove('published');
-            }});
+            }});*/
 
     }
 
