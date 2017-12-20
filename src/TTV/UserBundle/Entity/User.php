@@ -3,6 +3,7 @@
 namespace TTV\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="TTV\UserBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"username"}, message="Cet identifiant est déjà pris")
  */
 class User implements UserInterface
 {
@@ -69,7 +71,7 @@ class User implements UserInterface
 
     /**
      * @var UploadedFile
-     * @Assert\Image
+     * @Assert\Image(maxSize="200k", maxSizeMessage="La photo d'avatar ne doit pas dépasser 200k.")
      */
     private $file;
 

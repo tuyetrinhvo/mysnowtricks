@@ -15,7 +15,7 @@ class ImageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('file', FileType::class, ['label' => ' Choisir une Image'])
+        $builder->add('file', FileType::class, ['label' => 'Taille Maximale de l\'image est 1M'])
                ;
     }/**
      * {@inheritdoc}

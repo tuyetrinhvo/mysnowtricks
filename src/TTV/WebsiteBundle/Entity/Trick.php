@@ -5,6 +5,8 @@ namespace TTV\WebsiteBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Trick
@@ -12,6 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="trick")
  * @ORM\Entity(repositoryClass="TTV\WebsiteBundle\Repository\TrickRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"name"}, message="Une figure existe déjà avec ce nom")
  */
 class Trick
 {
@@ -28,13 +31,15 @@ class Trick
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\DateTime()
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\Length(min=4, minMessage="Le nom doit faire au moins {{ limit }} caractères.")
      */
     private $name;
 
@@ -42,6 +47,10 @@ class Trick
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min=10, minMessage="La description doit faire au moins {{ limit }} caractères."
+     *     max=8000, maxMessage="La description ne doit pas dépasser {{ limit }} caractères.")
      */
     private $description;
 
@@ -52,6 +61,7 @@ class Trick
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $updatedAt;
 
@@ -64,12 +74,14 @@ class Trick
     /**
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Category")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $user;
 
@@ -77,6 +89,7 @@ class Trick
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Comment", mappedBy="trick", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $comments;
 
@@ -84,6 +97,7 @@ class Trick
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $images;
 
@@ -91,6 +105,7 @@ class Trick
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="TTV\WebsiteBundle\Entity\Video", mappedBy="trick", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $videos;
 

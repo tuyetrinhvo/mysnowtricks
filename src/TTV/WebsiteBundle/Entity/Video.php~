@@ -29,9 +29,22 @@ class Video
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick")
+     * @var string
+     * @ORM\Column(name="platform", type="string", length=128, nullable=true)
+     */
+    private $platform;
+
+    /**
+     * @var string
+     * @ORM\Column(name="code", type="string", length=128, nullable=true)
+     */
+    private $code;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick", inversedBy="videos")
      */
     private $trick;
+
     
     /**
      * Get id
@@ -46,14 +59,31 @@ class Video
     /**
      * Set url
      *
-     * @param string $url
+     * @param string $iframe
      *
      * @return Video
      */
-    public function setUrl($url)
+    public function setUrl($iframe = null)
     {
-        $this->url = $url;
+        $testYT = preg_match('/youtube/i', $iframe);
+        $testDM = preg_match('/dailymotion/i', $iframe);
 
+        if($testYT){
+            $platform = 'youtube';
+            $code = preg_split("/\"/",str_replace('embed/', '', stristr($iframe, 'embed/')))[0];
+        }elseif($testDM){
+            $platform = 'dailymotion';
+            $code = preg_split("/\"/",str_replace('video/', '', stristr($iframe, 'video/')))[0];
+        }else{
+            $platform = null;
+            $code = null;
+        }
+
+        if ($platform != null && $code != null){
+            $this->setPlatform($platform);
+            $this->setCode($code);
+        }
+        $this->url = $iframe;
         return $this;
     }
 
@@ -66,5 +96,28 @@ class Video
     {
         return $this->url;
     }
-}
 
+    /**
+     * Set trick
+     *
+     * @param \TTV\WebsiteBundle\Entity\Trick $trick
+     *
+     * @return Video
+     */
+    public function setTrick(Trick $trick)
+    {
+        $this->trick = $trick;
+
+        return $this;
+    }
+
+    /**
+     * Get trick
+     *
+     * @return \TTV\WebsiteBundle\Entity\Trick
+     */
+    public function getTrick()
+    {
+        return $this->trick;
+    }
+}
