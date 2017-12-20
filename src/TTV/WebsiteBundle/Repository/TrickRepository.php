@@ -61,7 +61,7 @@ class TrickRepository extends EntityRepository
                         ->setMaxResults(1)
                         ->getQuery();
 
-        $query->getOneOrNullResult();
+        return $query->getOneOrNullResult();
     }
 
     public function getNextTrick($currentId)
@@ -74,6 +74,6 @@ class TrickRepository extends EntityRepository
                         ->setMaxResults(1)
                         ->getQuery();
 
-        $query->getOneOrNullResult();
+        return $query->getOneOrNullResult();
     }
 }
