@@ -2,6 +2,7 @@
 
 namespace TTV\WebsiteBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,6 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TTV\WebsiteBundle\Entity\Comment;
 use TTV\WebsiteBundle\Entity\Image;
 use TTV\WebsiteBundle\Entity\Trick;
+use TTV\WebsiteBundle\Entity\Video;
 use TTV\WebsiteBundle\Form\CommentType;
 use TTV\WebsiteBundle\Form\TrickType;
 
@@ -41,10 +43,10 @@ class WebsiteController extends Controller
         ]);
     }
 
-    public function viewAction($id, $page, Request $request)
+    public function viewAction($id, $slug, $page, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $trick = $em->getRepository('TTVWebsiteBundle:Trick')->getTrick($id);
+        $trick = $em->getRepository('TTVWebsiteBundle:Trick')->getTrick($id, $slug);
         $previousTrick = $em->getRepository('TTVWebsiteBundle:Trick')->getPreviousTrick($id);
         $nextTrick = $em->getRepository('TTVWebsiteBundle:Trick')->getNextTrick($id);
 
@@ -73,10 +75,10 @@ class WebsiteController extends Controller
 
             $request->getSession()->getFlashBag()->add('info', 'Le commentaire est bien ajouté !');
 
-            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId(), 'slug' => $slug]);
         }
 
-        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView()]);
+        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView(), 'slug' => $slug,]);
     }
 
     /**
@@ -107,12 +109,13 @@ class WebsiteController extends Controller
                     $trick->addVideo($video);
                 }
             }
+
             $em->persist($trick);
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'La nouvelle figure est bien ajoutée !');
 
-            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId(), 'slug' => $trick->getSlug()]);
         }
 
         return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
@@ -120,6 +123,7 @@ class WebsiteController extends Controller
 
     /**
      * @param $id
+     * @param $slug
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_USER')")
@@ -128,7 +132,7 @@ class WebsiteController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $trick = $em ->getRepository('TTVWebsiteBundle:Trick')->getTrick($id);
+        $trick = $em ->getRepository('TTVWebsiteBundle:Trick')->find($id);
 
         if (null === $trick){
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
@@ -155,7 +159,7 @@ class WebsiteController extends Controller
 
             $request->getSession()->getFlashBag()->add ('info', 'La figure est bien modifiée !');
 
-            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('ttv_website_view', ['id' => $id, 'slug' => $trick->getSlug(),]);
         }
 
         return $this->render('TTVWebsiteBundle:Website:edit.html.twig', ['trick' => $trick, 'form' => $form->createView()]);

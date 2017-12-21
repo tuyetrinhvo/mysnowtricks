@@ -13,7 +13,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class TrickRepository extends EntityRepository
 {
-    public function getTrick($id)
+    public function getTrick($id, $slug)
     {
         $query = $this->createQueryBuilder('t')
                     ->leftJoin('t.user', 'u')
@@ -26,6 +26,8 @@ class TrickRepository extends EntityRepository
                     ->addSelect('v')
                     ->andWhere('t.id = :id')
                     ->setParameter('id', $id)
+                    ->andWhere('t.slug = :slug')
+                    ->setParameter('slug', $slug)
                     ->getQuery();
         return $query->getOneOrNullResult();
 

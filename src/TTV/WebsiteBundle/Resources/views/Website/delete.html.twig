@@ -11,10 +11,10 @@
     </p>
 
     <form action="{{ path('ttv_website_delete', {'id' : trick.id}) }}" method="post">
-        <a href="{{ path('ttv_website_view', {'id' : trick.id}) }}" class="btn btn-default">
+        <a href="{{ path('ttv_website_view', {'id' : trick.id, 'slug' : trick.slug}) }}" class="btn btn-primary">
             <i class="glyphicon glyphicon-chevron-left"></i> Retour à la figure
         </a>
-        <input type="submit" value="Supprimer" class="btn btn-default"/>
+        <input type="submit" value="Supprimer" class="btn btn-danger col-sm-3 col-xs-4"/>
         {{ form_rest(form) }}
     </form>
 {% endblock %}
