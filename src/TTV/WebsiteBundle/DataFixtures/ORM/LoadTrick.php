@@ -112,10 +112,10 @@ class LoadTrick implements FixtureInterface
         $image9->setAlt('Slide-nose-slide');
 
         $video = new Video();
-        $video->setUrl('https://www.youtube.com/watch?v=M5NTCfdObfs');
+        $video->setUrl('https://www.youtube.com/embed/M5NTCfdObfs');
 
         $video1 = new Video();
-        $video1 ->setUrl('https://www.youtube.com/watch?v=t0F1sKMUChA');
+        $video1 ->setUrl('https://www.youtube.com/embed/t0F1sKMUChA');
 
         $trick1 = new Trick();
         $trick1->setName('Grab Mute');

@@ -27,7 +27,7 @@ class Image
     /**
      * @var string
      *
-     * @ORM\Column(name="extension", type="string", length=255)
+     * @ORM\Column(name="extension", type="string", length=255, unique=true)
      */
     private $extension;
 
@@ -40,7 +40,7 @@ class Image
 
     /**
      * @var UploadedFile
-     * @Assert\Image(maxSize="1M", maxSizeMessage="L'image ne doit pas dépasser 1M.")
+     * @Assert\Image(maxSize="1M", maxSizeMessage="Image ne doit pas dépasser 1M.")
      */
     private $file;
 
@@ -123,7 +123,7 @@ class Image
      * Set File
      * @param UploadedFile $file
      */
-    public function setFile(UploadedFile $file = null)
+    public function setFile(UploadedFile $file)
     {
         $this->file = $file;
         if(null !== $this ->extension){
@@ -145,7 +145,7 @@ class Image
             return;
         }
 
-        $this->extension = $this->file->guessExtension();
+        $this->extension = $this->file->getClientOriginalName();
         $this->alt = $this->file->getClientOriginalName();
     }
 
@@ -160,12 +160,12 @@ class Image
         }
 
         if(null !== $this->tempFilename){
-            $oldFile = $this->getUploadRootDir().'/'.$this->id.'.'.$this->tempFilename;
+            $oldFile = $this->getUploadRootDir().'/'.$this->tempFilename;
             if(file_exists($oldFile)){
                 unlink($oldFile);
             }
         }
-        $this->file->move($this->getUploadRootDir(), $this->id.'.'.$this->extension);
+        $this->file->move($this->getUploadRootDir(), $this->extension);
     }
 
     /**
@@ -173,7 +173,7 @@ class Image
      */
     public function preRemoveUpload()
     {
-        $this->tempFilename = $this->getUploadRootDir().'/'.$this->id. '.'.$this->extension;
+        $this->tempFilename = $this->getUploadRootDir().'/'.$this->extension;
     }
 
     /**

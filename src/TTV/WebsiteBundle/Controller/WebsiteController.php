@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TTV\WebsiteBundle\Entity\Comment;
+use TTV\WebsiteBundle\Entity\Image;
 use TTV\WebsiteBundle\Entity\Trick;
 use TTV\WebsiteBundle\Form\CommentType;
 use TTV\WebsiteBundle\Form\TrickType;
@@ -20,7 +21,7 @@ class WebsiteController extends Controller
             throw new NotFoundHttpException("La page .$page. n'existe pas !");
         }
 
-        $nbPerPage = 6;
+        $nbPerPage = $this->getParameter('index_nbperpage');
 
         $listTricks = $this->getDoctrine()
             ->getManager()
@@ -51,7 +52,7 @@ class WebsiteController extends Controller
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
         }
 
-        $nbPerPage = 3;
+        $nbPerPage = $this->getParameter('comment_nbperpage');
 
         $listComments = $em ->getRepository('TTVWebsiteBundle:Comment')->getCommentsByTrick($trick, $page, $nbPerPage);
 
@@ -92,6 +93,20 @@ class WebsiteController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
             $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $trick->setUser($user);
+
+
+            if ($trick->getImages() != null){
+                foreach ($trick->getImages() as $image){
+                    $trick->addImage($image);
+                }
+            }
+            if ($trick->getVideos() != null){
+                foreach ($trick->getVideos() as $video){
+                    $trick->addVideo($video);
+                }
+            }
             $em->persist($trick);
             $em->flush();
 
@@ -100,7 +115,7 @@ class WebsiteController extends Controller
             return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId()]);
         }
 
-        return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['form' => $form->createView()]);
+        return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
     }
 
     /**
@@ -123,6 +138,19 @@ class WebsiteController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
+
+            if ($trick->getImages() != null){
+                foreach ($trick->getImages() as $image){
+                    $trick->addImage($image);
+                }
+            }
+            if ($trick->getVideos() != null){
+                foreach ($trick->getVideos() as $video){
+                    $trick->addVideo($video);
+                }
+            }
+
+            $em->persist($trick);
             $em->flush();
 
             $request->getSession()->getFlashBag()->add ('info', 'La figure est bien modifiée !');
