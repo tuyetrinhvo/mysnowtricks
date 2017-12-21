@@ -8,7 +8,7 @@
 
     <div>
         {% for message in app.session.flashBag.get('info') %}
-            <p>Message flash : {{ message }}</p>
+            <p class="alert alert-info text-center"> {{ message }}</p>
         {% endfor %}
     </div>
 

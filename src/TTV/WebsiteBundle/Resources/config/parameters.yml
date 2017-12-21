@@ -1,0 +1,3 @@
+parameters:
+    comment_nbPerPage: 2
+    index_nbPerPage: 6
