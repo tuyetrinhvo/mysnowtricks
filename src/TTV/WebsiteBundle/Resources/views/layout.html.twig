@@ -62,10 +62,13 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a  href="{{ path('ttv_website_homepage') }}">Accueil</a></li>
-                    <li><a  href="{{ path('login') }}">Connexion</a></li>
-                    <li><a  href="{{ path('logout') }}">Déconnexion</a></li>
                     {% if is_granted('ROLE_USER') %}
+                     <li><a  href="{{ path('logout') }}">Déconnexion</a></li>
                     <li><a  href="{{ path('ttv_website_add') }}">Ajouter une figure</a></li>
+                    {% else %}
+                     <li><a  href="{{ path('login') }}">Connexion</a></li>
+                     <li><a  href="#">Inscription</a></li>
+
                     {% endif %}
                 </ul>
 
