@@ -27,6 +27,7 @@
 # Assets and user uploads
 /web/bundles/
 /web/uploads/
+/web/assets/
 
 # Managed by Composer
 /app/bootstrap.php.cache

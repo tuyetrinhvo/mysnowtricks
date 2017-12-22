@@ -6,6 +6,12 @@
 
 {% block body %}
 
+    <div>
+        {% for message in app.session.flashBag.get('info') %}
+            <p class="alert alert-info text-center"> {{ message }}</p>
+        {% endfor %}
+    </div>
+
     <!-- All blog posts -->
     <div class="mar-top-lg">
         <ul class="isotope-blog">
