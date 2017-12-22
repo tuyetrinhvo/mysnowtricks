@@ -55,6 +55,13 @@ class Image
     private $trick;
 
     /**
+     * Set extension
+     *
+     * @param string $extension
+     *
+     * @return Image
+     */
+    /**
      * Get id
      *
      * @return int
@@ -64,13 +71,6 @@ class Image
         return $this->id;
     }
 
-    /**
-     * Set extension
-     *
-     * @param string $extension
-     *
-     * @return Image
-     */
     public function setExtension($extension)
     {
         $this->extension = $extension;
@@ -187,6 +187,7 @@ class Image
             unlink($this->tempFilename);
         }
     }
+
     public function getUploadDir()
     {
         return 'uploads/tricks';
