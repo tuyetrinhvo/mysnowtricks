@@ -60,10 +60,10 @@
             </div>
             <div class="nav-links mar-top-md">
                 {% if previousTrick is not null %}
-                <a href="{{ path('ttv_website_view', {'id': previousTrick.id }) }}" class="text-uppercase pull-left" ><i class="iline1-arrowhead2"></i> Figure Précédente</a>
+                <a href="{{ path('ttv_website_view', {'id': previousTrick.id, 'slug': previousTrick.slug }) }}" class="text-uppercase pull-left" ><i class="iline1-arrowhead2"></i> Figure Précédente</a>
                     {% endif %}
                     {% if nextTrick is not null %}
-                        <a href="{{ path('ttv_website_view', {'id': nextTrick.id })}}" class="text-uppercase pull-right" >Figure Suivante <i class="iline1-chevron15"></i></a>
+                        <a href="{{ path('ttv_website_view', {'id': nextTrick.id, 'slug': nextTrick.slug })}}" class="text-uppercase pull-right" >Figure Suivante <i class="iline1-chevron15"></i></a>
                     {% endif %}
             </div> <!-- /nav-links -->
             <div class="text-center">
@@ -116,7 +116,7 @@
                         <ul class="page-numbers pagination">
                             {% for p in range (1, nbPages) %}
                                 <li{% if p == page %} class="current" {% endif %}>
-                                    <a class="page-numbers pagination" href="{{ path('ttv_website_view', {'id':trick.id, 'page' : p}) }}">{{ p }}</a>
+                                    <a class="page-numbers pagination" href="{{ path('ttv_website_view', {'id':trick.id, 'slug':trick.slug, 'page' : p}) }}">{{ p }}</a>
                                 </li>
                             {% endfor %}
                         </ul>

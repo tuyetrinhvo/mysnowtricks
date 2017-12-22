@@ -284,7 +284,7 @@ class User implements UserInterface
             return;
         }
 
-        $this->avatar = $this->file->guessExtension();
+        $this->avatar = $this->file->getClientOriginalName();
         $this->alt = $this->file->getClientOriginalName();
     }
 
@@ -299,12 +299,12 @@ class User implements UserInterface
         }
 
         if (null !== $this->tempFilename){
-            $oldFile = $this->getUploadRootDir().'/'.$this->id.'.'.$this->tempFilename;
+            $oldFile = $this->getUploadRootDir().'/'.$this->tempFilename;
             if(file_exists($oldFile)){
                unlink($oldFile);
             }
         }
-        $this->file->move($this->getUploadRootDir(), $this->id.'.'.$this->avatar);
+        $this->file->move($this->getUploadRootDir(), $this->avatar);
     }
 
     /**
@@ -312,7 +312,7 @@ class User implements UserInterface
      */
     public function preRemoveUpload()
     {
-        $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->avatar;
+        $this->tempFilename = $this->getUploadRootDir().'/'.$this->avatar;
     }
 
     /**

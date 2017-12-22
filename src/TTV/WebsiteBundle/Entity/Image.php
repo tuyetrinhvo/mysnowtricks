@@ -3,6 +3,7 @@
 namespace TTV\WebsiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -11,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="TTV\WebsiteBundle\Repository\ImageRepository")
+ * @UniqueEntity(fields={"extension"}, message="Une image existe déjà avec ce nom")
  * @ORM\HasLifecycleCallbacks
  */
 class Image
