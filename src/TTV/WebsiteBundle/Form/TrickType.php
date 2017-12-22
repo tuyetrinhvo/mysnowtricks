@@ -27,12 +27,12 @@ class TrickType extends AbstractType
                     'entry_type'    => ImageType::class,
                     'allow_add'     => true,
                     'allow_delete'  => true,
-                    'required'      => false])
+                    'by_reference'  => false])
                 ->add('videos', CollectionType::class, [
                     'entry_type'    => VideoType::class,
                     'allow_add'     => true,
                     'allow_delete'  => true,
-                    'required'      => false])
+                    'by_reference'  => false])
                 ->add('category', EntityType::class, [
                     'class'         => 'TTV\WebsiteBundle\Entity\Category',
                     'choice_label'  => 'name',

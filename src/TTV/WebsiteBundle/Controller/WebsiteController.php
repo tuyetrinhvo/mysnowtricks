@@ -97,19 +97,6 @@ class WebsiteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $user = $this->getUser();
             $trick->setUser($user);
-
-
-            if ($trick->getImages() != null){
-                foreach ($trick->getImages() as $image){
-                    $trick->addImage($image);
-                }
-            }
-            if ($trick->getVideos() != null){
-                foreach ($trick->getVideos() as $video){
-                    $trick->addVideo($video);
-                }
-            }
-
             $em->persist($trick);
             $em->flush();
 
@@ -141,19 +128,7 @@ class WebsiteController extends Controller
         $form = $this ->createForm(TrickType::class, $trick);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-
-
-            if ($trick->getImages() != null){
-                foreach ($trick->getImages() as $image){
-                    $trick->addImage($image);
-                }
-            }
-            if ($trick->getVideos() != null){
-                foreach ($trick->getVideos() as $video){
-                    $trick->addVideo($video);
-                }
-            }
-
+            if ($trick->getImages())
             $em->persist($trick);
             $em->flush();
 

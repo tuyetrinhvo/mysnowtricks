@@ -410,9 +410,9 @@ class Trick
      */
     public function addImage(Image $image)
     {
-        $image->setTrick($this);
+        $this->images[] = $image;
 
-        $this->getImages()->add($image);
+        $image->setTrick($this);
 
         return $this;
     }
@@ -446,9 +446,9 @@ class Trick
      */
     public function addVideo(Video $video)
     {
-        $video->setTrick($this);
+        $this->videos[] = $video;
 
-        $this->getVideos()->add($video);
+        $video->setTrick($this);
 
         return $this;
     }
