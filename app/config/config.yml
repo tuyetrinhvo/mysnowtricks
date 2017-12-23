@@ -6,11 +6,11 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -83,3 +83,11 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable:    true
+
+fos_user:
+    db_driver: orm # le type BDD à utiliser, on utilise l'ORM Doctrine
+    firewall_name: main
+    user_class: TTV\UserBundle\Entity\User
+    from_email:
+        address: me@mysnowtricks.com
+        sender_name: me
