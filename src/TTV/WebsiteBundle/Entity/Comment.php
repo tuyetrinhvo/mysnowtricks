@@ -47,13 +47,13 @@ class Comment
      * @Assert\Valid()
      */
     private $trick;
-
+/*
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */
-    private $user;
+ //   private $user;*/
 
     public function __construct()
     {

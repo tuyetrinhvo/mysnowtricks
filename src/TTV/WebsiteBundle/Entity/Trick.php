@@ -77,13 +77,13 @@ class Trick
      * @Assert\NotBlank()
      */
     private $category;
-
+/*
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */
-    private $user;
+ //   private $user;*/
 
     /**
      * @var ArrayCollection
