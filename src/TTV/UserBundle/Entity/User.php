@@ -3,8 +3,8 @@
 namespace TTV\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,7 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="TTV\UserBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"username"}, message="Cet identifiant est déjà pris")
  */
 class User extends BaseUser
 {
@@ -32,7 +31,7 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */
-//    private $avatar;
+    private $avatar;
 
 
     public function __construct()
@@ -48,21 +47,18 @@ class User extends BaseUser
      *
      * @return User
      */
-/*    public function setAvatar(Avatar $avatar)
+    public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
-
         return $this;
     }
-*//*
     /**
      * Get avatar
      *
      * @return string
      */
-/*    public function getAvatar()
+    public function getAvatar()
     {
         return $this->avatar;
     }
-*/
 }

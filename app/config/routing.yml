@@ -1,21 +1,7 @@
-#ttv_user:
- #   resource: "@TTVUserBundle/Resources/config/routing.yml"
-  #  prefix:   /
 
 ttv_website:
     resource: "@TTVWebsiteBundle/Resources/config/routing.yml"
     prefix:   /
-
-#login:
- #   path: /login
-  #  defaults:
-   #     _controller: TTVUserBundle:Security:login
-
-#login_check:
- #   path: /login_check
-
-#logout:
- #   path: /logout
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

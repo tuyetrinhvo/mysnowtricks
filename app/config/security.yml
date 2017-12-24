@@ -3,11 +3,11 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
-        TTV\UserBundle\Entity\User: sha512
+        TTV\UserBundle\Entity\User: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN:        ROLE_USER
-        ROLE_SUPER_ADMIN:  [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_ADMIN:  ROLE_ADMIN
     providers:
         fos_userbundle:
            id: fos_user.user_provider.username

@@ -2,3 +2,7 @@ services:
 #    ttv_user.example:
 #        class: TTV\UserBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    ttv.form.registration:
+        class: TTV\UserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: ttv_user_registration }

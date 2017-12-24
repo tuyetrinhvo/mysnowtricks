@@ -39,7 +39,7 @@ class Trick
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
-     * @Assert\Length(min=4, minMessage="Le nom doit faire au moins {{ limit }} caractères.")
+     * @Assert\Length(min=4, minMessage="Le nom doit faire au moins 4 caractères.")
      */
     private $name;
 
@@ -49,8 +49,8 @@ class Trick
      * @ORM\Column(name="description", type="text")
      * @Assert\NotBlank()
      * @Assert\Length(
-     *     min=10, minMessage="La description doit faire au moins {{ limit }} caractères.",
-     *     max=8000, maxMessage="La description ne doit pas dépasser {{ limit }} caractères.")
+     *     min=10, minMessage="La description doit faire au moins 10 caractères.",
+     *     max=8000, maxMessage="La description ne doit pas dépasser 8000 caractères.")
      */
     private $description;
 
@@ -77,13 +77,13 @@ class Trick
      * @Assert\NotBlank()
      */
     private $category;
-/*
+
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */
- //   private $user;*/
+    private $user;
 
     /**
      * @var ArrayCollection
