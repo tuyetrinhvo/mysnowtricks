@@ -91,3 +91,6 @@ fos_user:
     from_email:
         address: me@mysnowtricks.com
         sender_name: me
+    registration:
+        form:
+            type: TTV\UserBundle\Form\RegistrationType

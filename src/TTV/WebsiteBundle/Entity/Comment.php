@@ -37,8 +37,8 @@ class Comment
      * @ORM\Column(name="content", type="text")
      * @Assert\NotBlank()
      * @Assert\Length(
-     *     min="4", minMessage="Le commentaire doit faire au moins {{ limit }} caractères.",
-     *     max="1000", maxMessage="Le commentaire ne doit pas dépasser {{ limit }} caractères.")
+     *     min="4", minMessage="Le commentaire doit faire au moins 4 caractères.",
+     *     max="1000", maxMessage="Le commentaire ne doit pas dépasser 1000 caractères.")
      */
     private $content;
 
@@ -47,13 +47,13 @@ class Comment
      * @Assert\Valid()
      */
     private $trick;
-/*
+
     /**
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()
      */
- //   private $user;*/
+    private $user;
 
     public function __construct()
     {
