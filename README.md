@@ -13,7 +13,10 @@
 * Update composer.json
 * Create your database using  : php bin/console doctrine:database:create
 * Update the database : php bin/console doctrine:schema:update --force
-* Add the data : php /bin/console doctrine:fixtures:load
+* Add the data : php bin/console doctrine:fixtures:load
+* Intall Assets : php bin/console assets:install
+
+* Create a new user via Inscription !
 
 -----------------------------------------------------
 
@@ -21,6 +24,6 @@ Attention :
 
 On the first version, there isn't registration and the password isn't secure !
 
-On the final version, I use some third-party bundles like FOSUserBundle, etc.
+On the final version, I use FOSUserBundle.
 
 ### TuyetrinhVO
