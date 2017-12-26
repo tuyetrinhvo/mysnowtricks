@@ -25,7 +25,7 @@ class User extends BaseUser
      */
     protected $id;
 
-/*
+
     /**
      * @ORM\OneToOne(targetEntity="TTV\UserBundle\Entity\Avatar", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
@@ -39,7 +39,7 @@ class User extends BaseUser
         parent::__construct();
     }
 
-/*
+
     /**
      * Set avatar
      *

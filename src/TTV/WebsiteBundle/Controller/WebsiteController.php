@@ -51,7 +51,7 @@ class WebsiteController extends Controller
         $nextTrick = $em->getRepository('TTVWebsiteBundle:Trick')->getNextTrick($id);
 
         if (null === $trick){
-            throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
+            throw new NotFoundHttpException("La figure ".$id. '-'. $slug." n'existe pas !");
         }
 
         $nbPerPage = $this->getParameter('comment_nbperpage');
@@ -128,7 +128,7 @@ class WebsiteController extends Controller
         $form = $this ->createForm(TrickType::class, $trick);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-            if ($trick->getImages())
+
             $em->persist($trick);
             $em->flush();
 
