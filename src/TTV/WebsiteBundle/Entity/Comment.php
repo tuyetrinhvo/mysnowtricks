@@ -43,12 +43,14 @@ class Comment
     private $content;
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick", inversedBy="comments")
      * @Assert\Valid()
      */
     private $trick;
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity="TTV\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid()

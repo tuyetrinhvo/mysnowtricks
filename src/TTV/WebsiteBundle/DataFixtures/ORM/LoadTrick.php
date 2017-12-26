@@ -51,9 +51,12 @@ class LoadTrick implements FixtureInterface
         $avatar->setExtension('profil-01.png');
         $avatar->setAlt('profil-01');
 
+
         $avatar1 = new Avatar();
         $avatar1->setExtension('profil-02.png');
         $avatar1->setAlt('profil-02');
+
+
 
         $user1 = new User();
         $user1->setUsername('Mai');
@@ -61,7 +64,7 @@ class LoadTrick implements FixtureInterface
         $user1->setEmail('mai@gmail.vn');
         $user1->setRoles(['super-admin']);
         $user1->setAvatar($avatar);
-        //$user1->setAlt('profil-01');
+
 
         $manager->persist($user1);
 
@@ -71,7 +74,7 @@ class LoadTrick implements FixtureInterface
         $user2->setEmail('lys@yahoo.fr');
         $user2->setRoles(['super-admin']);
         $user2->setAvatar($avatar1);
-        //$user2->setAlt('profil-02');
+
 
 
         $manager->persist($user2);
