@@ -18,7 +18,7 @@
             <!-- .blog-post -->
         {% for trick in listTricks %}
             <li class="blog-post wow fadeInUp " data-wow-duration="1s" data-wow-delay=".7s">
-                {% if is_granted('ROLE_USER') %}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <span class="blog-date"><a href="{{ path('ttv_website_edit', {'id': trick.id}) }}"> <img src="/assets/images/update.png" alt="Modifier"/></a>
                     <small class="blog-month"><a href="{{ path('ttv_website_delete', {'id': trick.id, 'slug': trick.slug }) }}"> <img src="/assets/images/delete.png" alt="Supprimer"/></a></small>
                     </span>

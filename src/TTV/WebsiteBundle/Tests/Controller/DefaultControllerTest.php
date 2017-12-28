@@ -4,6 +4,7 @@ namespace TTV\WebsiteBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+
 class DefaultControllerTest extends WebTestCase
 {
     public function testIndex()
@@ -12,6 +13,8 @@ class DefaultControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        $this->assertContains('trick', $client->getResponse()->getContent());
+
     }
+
 }

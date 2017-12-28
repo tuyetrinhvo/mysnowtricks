@@ -2,15 +2,12 @@
 
 namespace TTV\WebsiteBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TTV\WebsiteBundle\Entity\Comment;
-use TTV\WebsiteBundle\Entity\Image;
 use TTV\WebsiteBundle\Entity\Trick;
-use TTV\WebsiteBundle\Entity\Video;
 use TTV\WebsiteBundle\Form\CommentType;
 use TTV\WebsiteBundle\Form\TrickType;
 
@@ -32,7 +29,7 @@ class WebsiteController extends Controller
 
         $nbPages = ceil(count($listTricks) / $nbPerPage );
         if ($page > $nbPages){
-            throw $this->createNotFoundException("La page ".$page."  n'existe pas !");
+            throw $this->createNotFoundException('La page '.$page.'  n\'existe pas !');
         }
 
         // On donne toutes les informations nécessaires à la vue
@@ -43,7 +40,7 @@ class WebsiteController extends Controller
         ]);
     }
 
-    public function viewAction($id, $slug, $page, Request $request)
+    public function viewsAction($id, $slug, $page, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $trick = $em->getRepository('TTVWebsiteBundle:Trick')->getTrick($id, $slug);
@@ -51,7 +48,7 @@ class WebsiteController extends Controller
         $nextTrick = $em->getRepository('TTVWebsiteBundle:Trick')->getNextTrick($id);
 
         if (null === $trick){
-            throw new NotFoundHttpException("La figure ".$id. '-'. $slug." n'existe pas !");
+            throw new NotFoundHttpException('La figure '.$id. '-'. $slug.' n\'existe pas !');
         }
 
         $nbPerPage = $this->getParameter('comment_nbperpage');
@@ -81,11 +78,7 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView(), 'slug' => $slug,]);
     }
 
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
-     */
+
     public function addAction(Request $request)
     {
         $trick = new Trick();
@@ -108,13 +101,7 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
     }
 
-    /**
-     * @param $id
-     * @param $slug
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
-     */
+
     public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -140,12 +127,7 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:edit.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
     }
 
-    /**
-     * @param $id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Security("has_role('ROLE_USER')")
-     */
+
     public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
