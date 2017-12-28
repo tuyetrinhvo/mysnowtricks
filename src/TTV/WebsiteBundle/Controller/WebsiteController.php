@@ -17,7 +17,7 @@ class WebsiteController extends Controller
     {
         if($page < 1)
         {
-            throw new NotFoundHttpException("La page .$page. n'existe pas !");
+            throw new NotFoundHttpException('La page .$page. n\'existe pas !');
         }
 
         $nbPerPage = $this->getParameter('index_nbperpage');
@@ -135,7 +135,7 @@ class WebsiteController extends Controller
         $trick = $em->getRepository('TTVWebsiteBundle:Trick')->find($id);
 
         if (null === $trick){
-            throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
+            throw new NotFoundHttpException('La figure '.$id.' n\'existe pas !');
         }
 
         $form = $this -> get('form.factory')->create();
