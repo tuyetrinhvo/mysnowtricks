@@ -4,7 +4,6 @@ namespace TTV\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -34,10 +33,10 @@ class User extends BaseUser
     private $avatar;
 
 
-    public function __construct()
+   /* public function __construct()
     {
         parent::__construct();
-    }
+    }*/
 
 
     /**
