@@ -71,7 +71,7 @@
                     <i class="glyphicon glyphicon-chevron-left"></i>
                     Retour à la liste des figures
                 </a>
-                {% if is_granted('ROLE_USER') %}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <a href="{{ path('ttv_website_edit', {'id': trick.id }) }}" class="btn btn-primary btn-md">
                     <i class="glyphicon glyphicon-edit"></i>
                     Modifier la figure

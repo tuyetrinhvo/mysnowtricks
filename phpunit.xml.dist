@@ -9,18 +9,23 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_CLASS" value="AppKernel" />
+        <env name="KERNEL_CLASS" value="AppKernel" />
+        <env name="APP_DEV" value="test" />
+        <env name="APP_DEBUG" value="1" />
+        <env name="APP_SECRET" value="89355cd142ddd54471f4c85ede84c88a26f1061b" />
+        <env name="MAILER_URL" value="null://localhost" />
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>./tests</directory>
+        <testsuite name="mysnowtrick">
+            <directory>/tests/*Test.php</directory>
+            <file>/tests/TTVTest.php</file>
         </testsuite>
     </testsuites>
 
-    <filter>
+  <!--  <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
         </whitelist>
-    </filter>
+    </filter> -->
 </phpunit>
