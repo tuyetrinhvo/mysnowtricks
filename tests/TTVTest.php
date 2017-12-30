@@ -15,7 +15,7 @@ class TTVTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         // vérifier s'il y a au moins un ul tag
-        $this->assertGreaterThan(0, $crawler ->filter('h4')->count());
+        $this->assertGreaterThan(0, $crawler ->filter('li')->count());
 
         // vérifier s'il le contenu de la réponse contient le mot 'figure'
         $this->assertContains('figure', $client->getResponse()->getContent());
