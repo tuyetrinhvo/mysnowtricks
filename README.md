@@ -2,6 +2,8 @@
 #### Welcome to tuyetrinhvo on github
 #### Here is my work for the exercise "Create a website with Symfony"
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/7bdef94a-48e3-4f26-b71f-f0821d8cd9af/mini.png)](https://insight.sensiolabs.com/projects/7bdef94a-48e3-4f26-b71f-f0821d8cd9af)
+
 #### All the features of the web application:
 
 * A list of snowboard tricks,
