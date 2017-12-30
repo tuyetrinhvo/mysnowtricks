@@ -7,11 +7,11 @@
 {% block body %}
     <h3>Supprimer la figure {{ trick.name }}</h3>
     <p>
-        Etes-vous certain de vouloir supprimer la figure "{{ trick.name }}" ?
+        Etes-vous certain de vouloir supprimer la figure "{{ trick.name }} ?
     </p>
 
     <form action="{{ path('ttv_website_delete', {'id' : trick.id}) }}" method="post">
-        <a href="{{ path('ttv_website_view', {'id' : trick.id }) }}" class="btn btn-primary">
+        <a href="{{ path('ttv_website_view', {'id' : trick.id, 'slug' : trick.slug}) }}" class="btn btn-primary">
             <i class="glyphicon glyphicon-chevron-left"></i> Retour à la figure
         </a>
         <input type="submit" value="Supprimer" class="btn btn-danger col-sm-3 col-xs-4"/>

@@ -4,9 +4,9 @@ namespace TTV\WebsiteBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use TTV\WebsiteBundle\Entity\Image;
 
 class ImageType extends AbstractType
 {
@@ -17,14 +17,14 @@ class ImageType extends AbstractType
     {
         $builder->add('file', FileType::class, ['label' => 'Taille Maximale de l\'image est 1M'])
                ;
-    }
-
-
+    }/**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Image::class,
-        ]);
+        $resolver->setDefaults(array(
+            'data_class' => 'TTV\WebsiteBundle\Entity\Image'
+        ));
     }
 
     /**

@@ -49,19 +49,11 @@ class Image
     private $tempFilename;
 
     /**
-     *
      * @ORM\ManyToOne(targetEntity="TTV\WebsiteBundle\Entity\Trick", inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
 
-    /**
-     * Set extension
-     *
-     * @param string $extension
-     *
-     * @return Image
-     */
     /**
      * Get id
      *
@@ -72,6 +64,13 @@ class Image
         return $this->id;
     }
 
+    /**
+     * Set extension
+     *
+     * @param string $extension
+     *
+     * @return Image
+     */
     public function setExtension($extension)
     {
         $this->extension = $extension;
@@ -188,7 +187,6 @@ class Image
             unlink($this->tempFilename);
         }
     }
-
     public function getUploadDir()
     {
         return 'uploads/tricks';

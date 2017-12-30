@@ -23,7 +23,7 @@
             {% endif %}
             <i class="iline2-rectangular22 text-primary">{{ trick.nbcomments }} Commentaires</i>
 
-            <h4 class="media-heading text-primary text-center avatar"> <span class="small text-muted"><i> Ajoutée par </i></span>{% if trick.user.avatar is not null %} <img  alt="{{trick.user.avatar.alt}}" src="{{ asset('uploads/avatars/'~trick.user.avatar.extension~'') }}" > {% endif %}{{ trick.user.username }} </h4>
+            <h4 class="media-heading text-primary text-center avatar"> <span class="small text-muted"><i> Ajoutée par </i></span>{% if trick.user.avatar is not null %} <img  alt="avatar" src="{{ asset('uploads/avatars/'~trick.user.avatar~'') }}" > {% endif %}{{ trick.user.username }} </h4>
         </div>
 
 
@@ -58,13 +58,20 @@
 
                 </div>
             </div>
-
-            <div class="text-center mar-top-md">
+            <div class="nav-links mar-top-md">
+                {% if previousTrick is not null %}
+                <a href="{{ path('ttv_website_view', {'id': previousTrick.id, 'slug': previousTrick.slug }) }}" class="text-uppercase pull-left" ><i class="iline1-arrowhead2"></i> Figure Précédente</a>
+                    {% endif %}
+                    {% if nextTrick is not null %}
+                        <a href="{{ path('ttv_website_view', {'id': nextTrick.id, 'slug': nextTrick.slug })}}" class="text-uppercase pull-right" >Figure Suivante <i class="iline1-chevron15"></i></a>
+                    {% endif %}
+            </div> <!-- /nav-links -->
+            <div class="text-center">
                 <a href="{{ path('ttv_website_homepage') }}" class="btn btn-primary btn-md">
                     <i class="glyphicon glyphicon-chevron-left"></i>
                     Retour à la liste des figures
                 </a>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('ttv_website_edit', {'id': trick.id }) }}" class="btn btn-primary btn-md">
                     <i class="glyphicon glyphicon-edit"></i>
                     Modifier la figure
@@ -87,7 +94,7 @@
                         <li class="media">
                             <div class="media-left">
                             {% if comment.user.avatar is not null %}
-                                <img class="media-object" alt="{{ comment.user.avatar.alt }}" src="{{ asset('uploads/avatars/'~comment.user.avatar.extension~'') }}" data-holder-rendered="true" />
+                                <img class="media-object" alt="64x64" src="{{ asset('uploads/avatars/'~comment.user.avatar~'') }}" data-holder-rendered="true" />
                             {% endif %}
                             </div>
                             <div class="media-body">
@@ -109,14 +116,14 @@
                         <ul class="page-numbers pagination">
                             {% for p in range (1, nbPages) %}
                                 <li{% if p == page %} class="current" {% endif %}>
-                                    <a class="page-numbers pagination" href="{{ path('ttv_website_view', {'id':trick.id,'page' : p}) }}">{{ p }}</a>
+                                    <a class="page-numbers pagination" href="{{ path('ttv_website_view', {'id':trick.id, 'slug':trick.slug, 'page' : p}) }}">{{ p }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
                     </nav>
                     {% endif %}
                     <!-- /.navigation -->
-                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% if is_granted('ROLE_USER') %}
                     <h4 class="mar-top-md">Rédiger un commentaire</h4>
                     <span class="line-sep-gray"></span>
 

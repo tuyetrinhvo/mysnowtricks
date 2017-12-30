@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html  lang="fr">
+<html  lang="en">
 <head>
-{% block meta %}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Here is my work for the exercise 'Create my first website with Symfony'">
+    <meta name="description" content="Here is my work for the exercise 'Create my first blog in PHP'">
     <meta name="author" content="I'm Tuyetrinhvo, Web developer">
-{% endblock %}
+
     <title>{% block title %}Snowtricks Website{% endblock %}</title>
 
     {% block stylesheets %}
@@ -19,14 +19,14 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css" rel="stylesheet" >
         <!-- Theme CSS -->
-        <link href="{{ asset('/assets/css/mysnowtricks.css') }}" type="text/css" rel="stylesheet" />
-        <link href="{{ asset('/assets/css/responsive.css') }}" type="text/css" rel="stylesheet" />
-        <link href="{{ asset('/assets/css/iline-icons.css') }}" type="text/css" rel="stylesheet" />
+        <link href="/assets/css/mysnowtricks.css" type="text/css" rel="stylesheet" />
+        <link href="/assets/css/responsive.css" type="text/css" rel="stylesheet" />
+        <link href="/assets/css/iline-icons.css" type="text/css" rel="stylesheet" />
         <!-- Custom Fonts -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil:400,700,900:normal" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Allerta+Stencil:400,700,900:normal" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
 
 
@@ -62,12 +62,12 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a  href="{{ path('ttv_website_homepage') }}">Accueil</a></li>
-                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                     <li><a  href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                    {% if is_granted('ROLE_USER') %}
+                     <li><a  href="{{ path('logout') }}">Déconnexion</a></li>
                     <li><a  href="{{ path('ttv_website_add') }}">Ajouter une figure</a></li>
                     {% else %}
-                     <li><a  href="{{ path('fos_user_security_login') }}">Connexion</a></li>
-                     <li><a  href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+                     <li><a  href="{{ path('login') }}">Connexion</a></li>
+                     <li><a  href="#">Inscription</a></li>
 
                     {% endif %}
                 </ul>
@@ -81,9 +81,9 @@
 
 <div class="main-content">
     <!-- HEADER TREE -->
-    <section class="header-tree">
+    <section class="header-tree" data-speed="8" data-type="background">
         <!-- parallax background -->
-        <div class="cover-1"></div>
+        <div class="cover-1" data-type="sprite" data-offsetY="540" data-Xposition="50%" data-speed="2"></div>
 
     </section>
     <!-- HEADER TREE END -->
@@ -151,22 +151,26 @@
 
     <!-- Theme JavaScript -->
 
- <script type="text/javascript" src="{{ asset('/assets/js/libs/jquery-1.11.2.min.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/jqBootstrapValidation.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/imagesloaded.pkgd.min.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/imagesloaded.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/jquery.magnific-popup.min.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/bootstrap/js/bootstrap.min.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/isotope.pkgd.min.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/ParallaxScrolling.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/jquery.mailchimp.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/wow.min.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/jquery.fittext.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/jquery.lettering.js') }}"></script>
- <script type="text/javascript" src="{{ asset('/assets/js/libs/jquery.textillate.js') }}"></script>
+<script src="/assets/js/libs/jquery-1.11.2.min.js"></script>
+<script src="/assets/js/libs/jqBootstrapValidation.js"></script>
+ <script src="/assets/js/libs/imagesloaded.pkgd.min.js"></script>
+ <script src="/assets/js/libs/imagesloaded.js"></script>
+ <script src="/assets/js/libs/jquery.magnific-popup.min.js"></script>
+ <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+ <script src="/assets/js/libs/isotope.pkgd.min.js"></script>
+ <script src="/assets/js/libs/ParallaxScrolling.js"></script>
+ <script src="/assets/js/libs/jquery.mailchimp.js"></script>
+ <script src="/assets/js/libs/wow.min.js"></script>
+ <script src="/assets/js/libs/jquery.fittext.js"></script>
+ <script src="/assets/js/libs/jquery.lettering.js"></script>
+ <script src="/assets/js/libs/jquery.textillate.js"></script>
 
+ <script type="text/javascript"  src="/assets/js/mysnowtricks.js"></script>
 
-
+ <!--[if lt IE 9]>
+ <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+ <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+ <![endif]-->
 
 {% endblock %}
 

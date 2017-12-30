@@ -2,8 +2,6 @@
 #### Welcome to tuyetrinhvo on github
 #### Here is my work for the exercise "Create a website with Symfony"
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/7bdef94a-48e3-4f26-b71f-f0821d8cd9af/mini.png)](https://insight.sensiolabs.com/projects/7bdef94a-48e3-4f26-b71f-f0821d8cd9af)
-
 #### All the features of the web application:
 
 * A list of snowboard tricks,
@@ -15,10 +13,7 @@
 * Update composer.json
 * Create your database using  : php bin/console doctrine:database:create
 * Update the database : php bin/console doctrine:schema:update --force
-* Add the data : php bin/console doctrine:fixtures:load
-* Intall Assets : php bin/console assets:install
-
-* Create a new user via Inscription !
+* Add the data : php /bin/console doctrine:fixtures:load
 
 -----------------------------------------------------
 
@@ -26,6 +21,6 @@ Attention :
 
 On the first version, there isn't registration and the password isn't secure !
 
-On the final version, I use FOSUserBundle.
+On the final version, I use the third-party bundle FOSUserBundle.
 
 ### TuyetrinhVO

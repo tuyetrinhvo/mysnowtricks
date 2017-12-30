@@ -4,8 +4,8 @@ namespace TTV\WebsiteBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use TTV\UserBundle\Entity\Avatar;
 use TTV\UserBundle\Entity\User;
+use TTV\UserBundle\Entity\Avatar;
 use TTV\WebsiteBundle\Entity\Category;
 use TTV\WebsiteBundle\Entity\Image;
 use TTV\WebsiteBundle\Entity\Trick;
@@ -61,7 +61,7 @@ class LoadTrick implements FixtureInterface
         $user1 = new User();
         $user1->setUsername('Mai');
         $user1->setPassword('123');
-        $user1->setEmail('mai@gmail.vn');
+        $user1->setSalt('');
         $user1->setRoles(['super-admin']);
         $user1->setAvatar($avatar);
 
@@ -71,7 +71,7 @@ class LoadTrick implements FixtureInterface
         $user2 = new User();
         $user2->setUsername('Lys');
         $user2->setPassword('123');
-        $user2->setEmail('lys@yahoo.fr');
+        $user2->setSalt('');
         $user2->setRoles(['super-admin']);
         $user2->setAvatar($avatar1);
 

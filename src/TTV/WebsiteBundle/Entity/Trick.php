@@ -39,7 +39,7 @@ class Trick
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
-     * @Assert\Length(min=4, minMessage="Le nom doit faire au moins 4 caractères.")
+     * @Assert\Length(min=4, minMessage="Le nom doit faire au moins {{ limit }} caractères.")
      */
     private $name;
 
@@ -49,8 +49,8 @@ class Trick
      * @ORM\Column(name="description", type="text")
      * @Assert\NotBlank()
      * @Assert\Length(
-     *     min=10, minMessage="La description doit faire au moins 10 caractères.",
-     *     max=8000, maxMessage="La description ne doit pas dépasser 8000 caractères.")
+     *     min=10, minMessage="La description doit faire au moins {{ limit }} caractères.",
+     *     max=8000, maxMessage="La description ne doit pas dépasser {{ limit }} caractères.")
      */
     private $description;
 
@@ -410,9 +410,9 @@ class Trick
      */
     public function addImage(Image $image)
     {
-        $this->images[] = $image;
-
         $image->setTrick($this);
+
+        $this->getImages()->add($image);
 
         return $this;
     }
@@ -446,9 +446,9 @@ class Trick
      */
     public function addVideo(Video $video)
     {
-        $this->videos[] = $video;
-
         $video->setTrick($this);
+
+        $this->getVideos()->add($video);
 
         return $this;
     }
