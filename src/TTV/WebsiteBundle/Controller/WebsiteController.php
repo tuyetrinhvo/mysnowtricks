@@ -78,7 +78,7 @@ class WebsiteController extends Controller
             return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId(), 'slug' => $slug]);
         }
 
-        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView(), 'slug' => $slug,]);
+        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView(), 'slug' => $slug]);
     }
 
     /**
@@ -97,19 +97,6 @@ class WebsiteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $user = $this->getUser();
             $trick->setUser($user);
-
-
-            if ($trick->getImages() != null){
-                foreach ($trick->getImages() as $image){
-                    $trick->addImage($image);
-                }
-            }
-            if ($trick->getVideos() != null){
-                foreach ($trick->getVideos() as $video){
-                    $trick->addVideo($video);
-                }
-            }
-
             $em->persist($trick);
             $em->flush();
 
@@ -138,28 +125,16 @@ class WebsiteController extends Controller
             throw new NotFoundHttpException("La figure d'id ".$id." n'existe pas !");
         }
 
-        $form = $this ->createForm(TrickType::class, $trick);
+        $form = $this ->get('form.factory')->create(TrickType::class, $trick);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
-
-
-            if ($trick->getImages() != null){
-                foreach ($trick->getImages() as $image){
-                    $trick->addImage($image);
-                }
-            }
-            if ($trick->getVideos() != null){
-                foreach ($trick->getVideos() as $video){
-                    $trick->addVideo($video);
-                }
-            }
 
             $em->persist($trick);
             $em->flush();
 
             $request->getSession()->getFlashBag()->add ('info', 'La figure est bien modifiée !');
 
-            return $this->redirectToRoute('ttv_website_view', ['id' => $id, 'slug' => $trick->getSlug(),]);
+            return $this->redirectToRoute('ttv_website_view', ['id' => $id, 'slug' => $trick->getSlug()]);
         }
 
         return $this->render('TTVWebsiteBundle:Website:edit.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
