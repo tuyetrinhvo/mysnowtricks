@@ -1,0 +1,29 @@
+{% extends "TTVWebsiteBundle::layout.html.twig" %}
+
+{% block meta %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% endblock %}
+{% block title %}
+    Erreur Code {{ status_code }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="text-center mar-bottom-5x mar-top-5x">
+        <h1>Oups! Une Erreur Interne du Serveur</h1>
+        <h2>Le serveur a renvoyé une "{{ status_code }} Erreur Interne du Serveur".</h2>
+
+        <h3>
+            {% if exception.message is not null %}
+                Message de l'erreur : {{ exception.message }} !<br/>
+            {% else %}
+             Nous allons la réparer dès que possible.<br/>
+
+            {% endif %}
+            Nous sommes désolées pour le dérangement !
+        </h3>
+
+    </div>
+
+{% endblock %}

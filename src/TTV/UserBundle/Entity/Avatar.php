@@ -3,7 +3,6 @@
 namespace TTV\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="avatar")
  * @ORM\Entity(repositoryClass="TTV\UserBundle\Repository\AvatarRepository")
- * @UniqueEntity(fields={"extension"}, message="Un avatar existe déjà avec ce nom")
+ * @ORM\HasLifecycleCallbacks
  */
 class Avatar
 {
@@ -28,7 +27,7 @@ class Avatar
     /**
      * @var string
      *
-     * @ORM\Column(name="extension", type="string", length=255, unique=true)
+     * @ORM\Column(name="extension", type="string", length=255 )
      */
     private $extension;
 
@@ -107,10 +106,7 @@ class Avatar
 
     /**
      * Set file
-     *
-     * @param string $file
-     *
-     * @return Avatar
+     * @param UploadedFile $file
      */
     public function setFile(UploadedFile $file)
     {
@@ -127,21 +123,11 @@ class Avatar
     /**
      * Get file
      *
-     * @return string
+     * @return UploadedFile
      */
     public function getFile()
     {
         return $this->file;
-    }
-
-    public function getUploadDir()
-    {
-        return 'uploads/avatars';
-    }
-
-    protected function getUploadRootDir()
-    {
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
 
@@ -195,6 +181,17 @@ class Avatar
             unlink($this->tempFilename);
         }
     }
+
+    public function getUploadDir()
+    {
+        return 'uploads/avatars';
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
 
     public function getWebPath()
     {

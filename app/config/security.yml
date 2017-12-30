@@ -2,17 +2,15 @@
 # https://symfony.com/doc/current/security.html
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        TTV\UserBundle\Entity\User: plaintext
+        FOS\UserBundle\Model\UserInterface: bcrypt
+        TTV\UserBundle\Entity\User: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN:        ROLE_USER
-        ROLE_SUPER_ADMIN:  [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_ADMIN:  ROLE_ADMIN
     providers:
-        main:
-           entity:
-              class: TTV\UserBundle\Entity\User
-              property: username
+        fos_userbundle:
+           id: fos_user.user_provider.username
 
 
     firewalls:
@@ -22,14 +20,18 @@ security:
         main:
             pattern: ^/
             anonymous: true
-            provider: main
+            provider: fos_userbundle
 
             form_login:
-                login_path: login
-                check_path: login_check
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
             logout:
-                path:       logout
-                target:     login
+                path:       fos_user_security_logout
+                target:     fos_user_security_login
+            remember_me:
+                secret: '%secret%'
 
 #access_control:
     #- { path: ^/admin, roles: ROLE_ADMIN }
