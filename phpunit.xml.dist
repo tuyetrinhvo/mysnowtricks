@@ -2,30 +2,30 @@
 
 <!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/5.7/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
          backupGlobals="false"
          colors="true"
          bootstrap="vendor/autoload.php"
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <env name="KERNEL_CLASS" value="AppKernel" />
-        <env name="APP_DEV" value="test" />
-        <env name="APP_DEBUG" value="1" />
-        <env name="APP_SECRET" value="89355cd142ddd54471f4c85ede84c88a26f1061b" />
-        <env name="MAILER_URL" value="null://localhost" />
+        <server name="KERNEL_CLASS" value="AppKernel" />
     </php>
 
     <testsuites>
-        <testsuite name="mysnowtrick">
-            <directory>/tests/*Test.php</directory>
-            <file>/tests/TTVTest.php</file>
+        <testsuite name="Project Test Suite">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
-  <!--  <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+            <exclude>
+                <directory>src/*Bundle/Resources</directory>
+                <directory>src/*/*Bundle/Resources</directory>
+                <directory>src/*/Bundle/*Bundle/Resources</directory>
+            </exclude>
         </whitelist>
-    </filter> -->
+    </filter>
 </phpunit>

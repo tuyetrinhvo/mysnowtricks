@@ -9,6 +9,7 @@ use TTV\WebsiteBundle\Entity\Comment;
 use TTV\WebsiteBundle\Entity\Trick;
 use TTV\WebsiteBundle\Form\CommentType;
 use TTV\WebsiteBundle\Form\TrickType;
+use Symfony\Component\HttpFoundation\Tests\Session\SessionInterface;
 
 class WebsiteController extends Controller
 {
@@ -16,7 +17,7 @@ class WebsiteController extends Controller
     {
         if($page < 1)
         {
-            throw new NotFoundHttpException('La page .$page. n\'existe pas !');
+            throw new NotFoundHttpException('La page '.$page.' n\'existe pas !');
         }
 
         $nbPerPage = $this->getParameter('index_nbperpage');
@@ -39,15 +40,14 @@ class WebsiteController extends Controller
         ]);
     }
 
-    public function viewsAction($id, $slug, $page, Request $request)
+    public function viewsAction($id, $page, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $trick = $em->getRepository('TTVWebsiteBundle:Trick')->getTrick($id, $slug);
-        $previousTrick = $em->getRepository('TTVWebsiteBundle:Trick')->getPreviousTrick($id);
-        $nextTrick = $em->getRepository('TTVWebsiteBundle:Trick')->getNextTrick($id);
+        $trick = $em->getRepository('TTVWebsiteBundle:Trick')->find($id);
+
 
         if (null === $trick){
-            throw new NotFoundHttpException('La figure '.$id. '-'. $slug.' n\'existe pas !');
+            throw new NotFoundHttpException('La figure '.$id.' n\'existe pas !');
         }
 
         $nbPerPage = $this->getParameter('comment_nbperpage');
@@ -58,7 +58,7 @@ class WebsiteController extends Controller
 
         $comment = new Comment();
 
-        $form = $this->get('form.factory')->create(CommentType::class, $comment);
+        $form = $this->createForm(CommentType::class, $comment);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
@@ -71,10 +71,10 @@ class WebsiteController extends Controller
 
             $request->getSession()->getFlashBag()->add('info', 'Le commentaire est bien ajouté !');
 
-            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId(), 'slug' => $slug]);
+            return $this->redirectToRoute('ttv_website_view', ['id' => $id]);
         }
 
-        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView(), 'slug' => $slug,]);
+        return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'form' => $form->createView() ]);
     }
 
 
@@ -82,7 +82,7 @@ class WebsiteController extends Controller
     {
         $trick = new Trick();
 
-        $form = $this ->get('form.factory')->create(TrickType::class, $trick);
+        $form = $this ->createForm(TrickType::class, $trick);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
 
@@ -94,7 +94,7 @@ class WebsiteController extends Controller
 
             $request->getSession()->getFlashBag()->add('info', 'La nouvelle figure est bien ajoutée !');
 
-            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId(), 'slug' => $trick->getSlug()]);
+            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId()]);
         }
 
         return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
@@ -120,7 +120,7 @@ class WebsiteController extends Controller
 
             $request->getSession()->getFlashBag()->add ('info', 'La figure est bien modifiée !');
 
-            return $this->redirectToRoute('ttv_website_view', ['id' => $id, 'slug' => $trick->getSlug(),]);
+            return $this->redirectToRoute('ttv_website_view', ['id' => $id ]);
         }
 
         return $this->render('TTVWebsiteBundle:Website:edit.html.twig', ['trick' => $trick, 'form' => $form->createView()]);

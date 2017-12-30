@@ -1,7 +1,7 @@
 <div>
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-    {# Les erreurs générales du formulaire. #}
+
     {{ form_errors(form) }}
 
     <div class="form-group row">
@@ -9,31 +9,32 @@
         {{ form_row(form.name) }}
         {{ form_row(form.description) }}
         {{ form_row(form.category) }}
+
         <div class="mar-bottom-sm">
             {{ form_row(form.images) }}
             <a href="#" id="add_image" class="btn btn-default">Ajouter une autre image</a>
          </div>
+
          <div class="mar-bottom-sm">
             {{ form_row(form.videos) }}
             <a href="#" id="add_video" class="btn btn-default">Ajouter une autre vidéo</a>
             </div>
 
         <div class="mar-top-md">
-         {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+
          {{ form_widget(form.envoyer, {'attr': {'class': 'btn btn-primary'}}) }}
         </div>
-        {# Génération automatique des champs pas encore écrits. Ce serait le champ CSRF (géré automatiquement par Symfony !) et tous les champs cachés (type « hidden »). #}
+
         {{ form_rest(form) }}
 
         </div>
     </div>
-    {# Fermeture de la balise <form> du formulaire HTML #}
+
     {{ form_end(form) }}
 </div>
 
-{# On charge la bibliothèque jQuery. Ici, je la prends depuis le CDN google
-   mais si vous l'avez en local, changez simplement l'adresse. #}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
 <script type="text/javascript" src="{{ asset('/assets/js/imageform.js') }}"></script>
