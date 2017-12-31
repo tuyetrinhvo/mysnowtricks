@@ -62,7 +62,7 @@ class LoadTrick implements FixtureInterface
         $user1->setUsername('Mai');
         $user1->setPassword('123');
         $user1->setEmail('mai@gmail.vn');
-        $user1->setRoles(['super-admin']);
+        $user1->setRoles(['']);
         $user1->setAvatar($avatar);
 
 
@@ -72,7 +72,7 @@ class LoadTrick implements FixtureInterface
         $user2->setUsername('Lys');
         $user2->setPassword('123');
         $user2->setEmail('lys@yahoo.fr');
-        $user2->setRoles(['super-admin']);
+        $user2->setRoles(['']);
         $user2->setAvatar($avatar1);
 
 
@@ -80,12 +80,52 @@ class LoadTrick implements FixtureInterface
         $manager->persist($user2);
 
         $comment = new Comment();
-        $comment->setContent('C\'est super !');
+        $comment->setContent('Je suis là');
         $comment->setUser($user2);
 
         $comment1 = new Comment();
         $comment1->setContent('Il existe plusieurs types de grabs selon la position de la saisie et la main choisie pour l\'effectuer, avec des difficultés variables. On peut appeler cette figure aussi "melancholie" ou "style week"');
         $comment1->setUser($user2);
+
+        $comment2 = new Comment();
+        $comment2->setContent('Il y a quelqu\'un ici déjà fait cette figure ?');
+        $comment2->setUser($user1);
+
+        $comment3 = new Comment();
+        $comment3->setContent('Personne ?!');
+        $comment3->setUser($user1);
+
+        $comment4 = new Comment();
+        $comment4->setContent('Moi non plus');
+        $comment4->setUser($user1);
+
+        $comment5 = new Comment();
+        $comment5->setContent('Mais je veux bien l\'essayer un jour');
+        $comment5->setUser($user1);
+
+        $comment6 = new Comment();
+        $comment6->setContent('Je parle toute seule');
+        $comment6->setUser($user1);
+
+        $comment7 = new Comment();
+        $comment7->setContent('C\'est quand ton prochain voyage au ski');
+        $comment7->setUser($user2);
+
+        $comment8 = new Comment();
+        $comment8->setContent('Je partirai le mois prochain');
+        $comment8->setUser($user2);
+
+        $comment9 = new Comment();
+        $comment9->setContent('Tu veux venir avec nous ?');
+        $comment9->setUser($user2);
+
+        $comment10 = new Comment();
+        $comment10->setContent('Tiens moi au courant');
+        $comment10->setUser($user2);
+
+        $comment11 = new Comment();
+        $comment11->setContent('J\'ai hâte');
+        $comment11->setUser($user2);
 
         $image = new Image();
         $image->setExtension('mute-grab.jpg');
@@ -139,6 +179,16 @@ class LoadTrick implements FixtureInterface
         $trick1->setCategory($category1);
         $trick1->setUser($user1);
         $trick1->addComment($comment);
+        $trick1->addComment($comment2);
+        $trick1->addComment($comment3);
+        $trick1->addComment($comment4);
+        $trick1->addComment($comment5);
+        $trick1->addComment($comment6);
+        $trick1->addComment($comment7);
+        $trick1->addComment($comment8);
+        $trick1->addComment($comment9);
+        $trick1->addComment($comment10);
+        $trick1->addComment($comment11);
         $trick1->addImage($image);
         $trick1->addVideo($video);
         $manager->persist($trick1);
@@ -149,7 +199,7 @@ class LoadTrick implements FixtureInterface
         $trick2->setCategory($category1);
         $trick2->setUser($user1);
         $trick2->addComment($comment1);
-        $trick2->addimage($image1);
+        $trick2->addImage($image1);
         $manager->persist($trick2);
 
 

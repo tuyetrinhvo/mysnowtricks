@@ -97,7 +97,7 @@ class WebsiteController extends Controller
 
             $request->getSession()->getFlashBag()->add('info', 'La nouvelle figure est bien ajoutée !');
 
-            return $this->redirectToRoute('ttv_website_view', ['id' => $trick->getId(), 'slug' => $trick->getSlug()]);
+            return $this->redirectToRoute('ttv_website_homepage');
         }
 
         return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
