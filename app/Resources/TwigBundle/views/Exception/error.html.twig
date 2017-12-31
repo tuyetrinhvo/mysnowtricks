@@ -15,11 +15,8 @@
         <h2>Le serveur a renvoyé Une Erreur Code : "{{ status_code }}".</h2>
 
         <h3>
-            {% if exception.message is not null %}
-            Message de l'erreur : {{ exception.message }} !<br/>
-            {% else %}
             Quelque chose est cassé. Nous allons la réparer dès que possible.<br/>
-            {% endif %}
+
             Nous sommes désolées pour le dérangement !
         </h3>
 

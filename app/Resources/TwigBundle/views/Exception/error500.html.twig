@@ -15,12 +15,7 @@
         <h2>Le serveur a renvoyé une "{{ status_code }} Erreur Interne du Serveur".</h2>
 
         <h3>
-            {% if exception.message is not null %}
-                Message de l'erreur : {{ exception.message }} !<br/>
-            {% else %}
-             Nous allons la réparer dès que possible.<br/>
-
-            {% endif %}
+            Nous allons la réparer dès que possible.<br/>
             Nous sommes désolées pour le dérangement !
         </h3>
 

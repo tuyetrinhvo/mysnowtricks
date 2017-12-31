@@ -9,6 +9,7 @@ use TTV\WebsiteBundle\Entity\Comment;
 use TTV\WebsiteBundle\Entity\Trick;
 use TTV\WebsiteBundle\Form\CommentType;
 use TTV\WebsiteBundle\Form\TrickType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class WebsiteController extends Controller
 {
@@ -77,7 +78,9 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:view.html.twig', ['trick' => $trick, 'listComments' =>$listComments, 'page' => $page, 'nbPages' => $nbPages, 'previousTrick' => $previousTrick, 'nextTrick' => $nextTrick, 'form' => $form->createView(), 'slug' => $slug,]);
     }
 
-
+    /**
+     *  @Security("has_role('ROLE_USER')")
+     */
     public function addAction(Request $request)
     {
         $trick = new Trick();
@@ -100,7 +103,9 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:add.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
     }
 
-
+    /**
+     *  @Security("has_role('ROLE_USER')")
+     */
     public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -126,7 +131,9 @@ class WebsiteController extends Controller
         return $this->render('TTVWebsiteBundle:Website:edit.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
     }
 
-
+    /**
+     *  @Security("has_role('ROLE_USER')")
+     */
     public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
