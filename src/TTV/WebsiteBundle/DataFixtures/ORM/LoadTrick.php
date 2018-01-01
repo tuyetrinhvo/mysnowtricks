@@ -47,15 +47,14 @@ class LoadTrick implements FixtureInterface
         $manager->persist($category8);
         $manager->persist($category9);
 
+
         $avatar = new Avatar();
         $avatar->setExtension('profil-01.png');
         $avatar->setAlt('profil-01');
 
-
         $avatar1 = new Avatar();
         $avatar1->setExtension('profil-02.png');
         $avatar1->setAlt('profil-02');
-
 
 
         $user1 = new User();
@@ -64,8 +63,6 @@ class LoadTrick implements FixtureInterface
         $user1->setEmail('mai@gmail.vn');
         $user1->setRoles(['']);
         $user1->setAvatar($avatar);
-
-
         $manager->persist($user1);
 
         $user2 = new User();
@@ -74,18 +71,8 @@ class LoadTrick implements FixtureInterface
         $user2->setEmail('lys@yahoo.fr');
         $user2->setRoles(['']);
         $user2->setAvatar($avatar1);
-
-
-
         $manager->persist($user2);
 
-        $comment = new Comment();
-        $comment->setContent('Je suis là');
-        $comment->setUser($user2);
-
-        $comment1 = new Comment();
-        $comment1->setContent('Il existe plusieurs types de grabs selon la position de la saisie et la main choisie pour l\'effectuer, avec des difficultés variables. On peut appeler cette figure aussi "melancholie" ou "style week"');
-        $comment1->setUser($user2);
 
         $comment2 = new Comment();
         $comment2->setContent('Il y a quelqu\'un ici déjà fait cette figure ?');
@@ -107,8 +94,12 @@ class LoadTrick implements FixtureInterface
         $comment6->setContent('Je parle toute seule');
         $comment6->setUser($user1);
 
+        $comment = new Comment();
+        $comment->setContent('Je suis là');
+        $comment->setUser($user2);
+
         $comment7 = new Comment();
-        $comment7->setContent('C\'est quand ton prochain voyage au ski');
+        $comment7->setContent('C\'est quand ton prochain voyage au ski ?');
         $comment7->setUser($user2);
 
         $comment8 = new Comment();
@@ -126,6 +117,11 @@ class LoadTrick implements FixtureInterface
         $comment11 = new Comment();
         $comment11->setContent('J\'ai hâte');
         $comment11->setUser($user2);
+
+        $comment1 = new Comment();
+        $comment1->setContent('Il existe plusieurs types de grabs selon la position de la saisie et la main choisie pour l\'effectuer, avec des difficultés variables. On peut appeler cette figure aussi "melancholie" ou "style week"');
+        $comment1->setUser($user2);
+
 
         $image = new Image();
         $image->setExtension('mute-grab.jpg');
@@ -173,6 +169,7 @@ class LoadTrick implements FixtureInterface
         $video1 = new Video();
         $video1 ->setUrl('https://www.youtube.com/embed/t0F1sKMUChA');
 
+
         $trick1 = new Trick();
         $trick1->setName('Grab Mute');
         $trick1->setDescription('Un grab consiste à attraper la planche avec la main pendant le saut. Mute : saisie de la carre frontside de la planche entre les deux pieds avec la main avant.');
@@ -193,6 +190,7 @@ class LoadTrick implements FixtureInterface
         $trick1->addVideo($video);
         $manager->persist($trick1);
 
+
         $trick2 = new Trick();
         $trick2->setName('Grab Sad');
         $trick2->setDescription('Un grab consiste à attraper la planche avec la main pendant le saut. Sad : saisie de la carre backside de la planche, entre les deux pieds, avec la main avant ;');
@@ -211,6 +209,7 @@ class LoadTrick implements FixtureInterface
         $trick3->addImage($image2);
         $trick3->addVideo($video1);
         $manager->persist($trick3);
+
 
         $trick4 = new Trick();
         $trick4->setName('Grab Stalefish');
@@ -238,6 +237,7 @@ class LoadTrick implements FixtureInterface
         $trick6->addImage($image5);
         $manager->persist($trick6);
 
+
         $trick7 = new Trick();
         $trick7->setName('Backside');
         $trick7->setDescription('Une rotation peut être frontside ou backside : une rotation frontside correspond à une rotation orientée vers la carre backside. Cela peut paraître incohérent mais l\'origine étant que dans un halfpipe ou une rampe de skateboard, une rotation frontside se déclenche naturellement depuis une position frontside (i.e. l\'appui se fait sur la carre frontside), et vice-versa. Ainsi pour un rider qui a une position regular (pied gauche devant), une rotation frontside se fait dans le sens inverse des aiguilles d\'une montre. Une rotation peut être agrémentée d\'un grab, ce qui rend le saut plus esthétique mais aussi plus difficile car la position tweakée a tendance à déséquilibrer le rideur et désaxer la rotation. De plus, le sens de la rotation a tendance à favoriser un sens de grab plutôt qu\'un autre. Les rotations de plus de trois tours existent mais sont plus rares, d\'abord parce que les modules assez gros pour lancer un tel saut sont rares, et ensuite parce que la vitesse de rotation est tellement élevée qu\'un grab devient difficile, ce qui rend le saut considérablement moins esthétique.');
@@ -255,6 +255,7 @@ class LoadTrick implements FixtureInterface
         $trick8->addImage($image7);
         $manager->persist($trick8);
 
+
         $trick9 = new Trick();
         $trick9->setName('Back Flips');
         $trick9->setDescription('Un flip est une rotation verticale. On distingue les front flips, rotations en avant, et les back flips, rotations en arrière. Il est possible de faire plusieurs flips à la suite, et d\'ajouter un grab à la rotation. Les flips agrémentés d\'une vrille existent aussi (Mac Twist, Hakon Flip, ...), mais de manière beaucoup plus rare, et se confondent souvent avec certaines rotations horizontales désaxées. Néanmoins, en dépit de la difficulté technique relative d\'une telle figure, le danger de retomber sur la tête ou la nuque est réel et conduit certaines stations de ski à interdire de telles figures dans ses snowparks.');
@@ -263,6 +264,7 @@ class LoadTrick implements FixtureInterface
         $trick9->addImage($image8);
         $manager->persist($trick9);
 
+
         $trick10 = new Trick();
         $trick10->setName('Nose Slide et Tail Silde');
         $trick10->setDescription('Un slide consiste à glisser sur une barre de slide. Le slide se fait soit avec la planche dans l\'axe de la barre, soit perpendiculaire, soit plus ou moins désaxé. On peut slider avec la planche centrée par rapport à la barre (celle-ci se situe approximativement au-dessous des pieds du rideur), mais aussi en nose slide, c\'est-à-dire l\'avant de la planche sur la barre, ou en tail slide, l\'arrière de la planche sur la barre.');
@@ -270,8 +272,6 @@ class LoadTrick implements FixtureInterface
         $trick10->setUser($user2);
         $trick10->addImage($image9);
         $manager->persist($trick10);
-
-
 
 
         $manager->flush();

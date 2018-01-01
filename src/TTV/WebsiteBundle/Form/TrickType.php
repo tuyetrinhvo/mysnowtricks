@@ -25,6 +25,7 @@ class TrickType extends AbstractType
                     'entry_type'    => ImageType::class,
                     'allow_add'     => true,
                     'allow_delete'  => true,
+                    'required'      => false,
                     'by_reference'  => false])
                 ->add('videos', CollectionType::class, [
                     'entry_type'    => VideoType::class,
@@ -38,16 +39,6 @@ class TrickType extends AbstractType
                     'multiple'      => false,
                     'label'         => 'Groupe'])
                 ->add('envoyer', SubmitType::class);
-
-        /*$builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
-            $trick = $event->getData();
-
-            if (null === $trick){ return; }
-            if (!$trick -> getPublished() || null === $trick->getId()){
-                $event->getForm()->add('published', CheckboxType::class, ['required' => false]);
-            } else {
-                $event->getForm()->remove('published');
-            }});*/
 
     }
 

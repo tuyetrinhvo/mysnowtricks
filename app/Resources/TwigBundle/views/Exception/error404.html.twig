@@ -13,14 +13,10 @@
 
     <div class="text-center mar-bottom-5x mar-top-5x">
         <h1>Oups! Une Erreur 404</h1>
-        <h2>Le serveur a renvoyé une erreur "{{ status_code }} Page ou Figure non trouvée".</h2>
+        <h2>Le serveur a renvoyé une erreur "{{ status_code }}".</h2>
 
         <h3>
-            {% if exception.message is not null %}
-                Message de l'erreur : {{ exception.message }} !!<br/>
-            {% else %}
-                Il semblerait que la page ou la figure que vous demandée n'existe pas !
-            {% endif %}
+            Il semblerait que la page ou la figure que vous demandée n'existe pas !
         </h3>
 
     </div>
