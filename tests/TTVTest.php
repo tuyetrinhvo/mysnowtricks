@@ -15,7 +15,7 @@ class TTVTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        // vérifier s'il y a au moins un ul tag
+        // vérifier s'il y a au moins un h4 tag
         $this->assertGreaterThan(0, $crawler ->filter('h4')->count());
 
         // vérifier s'il le contenu de la réponse contient le mot 'figure'
@@ -31,7 +31,7 @@ class TTVTest extends WebTestCase
 
         $crawler = $client->request('GET', '/trick/1-mute/');
 
-        // vérifier s'il y a au moins un ul tag
+        // vérifier s'il y a au moins un h3 tag
         $this->assertGreaterThan(0, $crawler ->filter('h3')->count());
 
         // vérifier s'il le contenu de la réponse contient le mot 'figure'
@@ -45,10 +45,21 @@ class TTVTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/add');
+        $client->request('GET', '/add');
 
         // vérifier s'il le status code de la réponse est 302
-        // The HTTP response status code 302 Found is a common way of performing URL redirection.
+        // 302 redirection temporaire : passer d'abord par la vérification d'authentification
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+
+    public function testEdit()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/edit/2');
+
+        // vérifier s'il le status code de la réponse est 302
+        // 302 redirection temporaire : passer d'abord par la vérification d'authentification
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
@@ -56,10 +67,10 @@ class TTVTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/delete/1');
+        $client->request('GET', '/delete/1');
 
         // vérifier s'il le status code de la réponse est 302
-        // The HTTP response status code 302 Found is a common way of performing URL redirection.
+        // 302 redirection temporaire : passer d'abord par la vérification d'authentification
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
@@ -75,7 +86,6 @@ class TTVTest extends WebTestCase
     {
         $trick = new Comment();
 
-        //$trick->setSlug('trick grap');
         $trick->setContent('c\'est bien !');
         $this->assertEquals('c\'est bien !', $trick->getContent());
     }
