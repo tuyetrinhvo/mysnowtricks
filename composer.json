@@ -2,6 +2,7 @@
     "name": "trinhvo/symfony",
     "license": "proprietary",
     "type": "project",
+    "description": "create a website",
     "autoload": {
         "psr-4": {
             "": "src/"
