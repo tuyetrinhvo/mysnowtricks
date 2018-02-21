@@ -27,6 +27,7 @@ framework:
         # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id: session.handler.native_file
         save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        name: mysnowtricks_session
     fragments: ~
     http_method_override: true
     assets: ~
@@ -44,6 +45,7 @@ twig:
 doctrine:
     dbal:
         driver: pdo_mysql
+        server_version: 5.7.14
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
