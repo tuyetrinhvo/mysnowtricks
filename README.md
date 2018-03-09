@@ -2,7 +2,9 @@
 #### Welcome to tuyetrinhvo on github
 #### Here is my work for the exercise "Create a website with Symfony"
 
-First version : [![SensioLabsInsight](https://insight.sensiolabs.com/projects/4f895279-1a52-4924-80f5-fd28fd79ddc2/mini.png)](https://insight.sensiolabs.com/projects/4f895279-1a52-4924-80f5-fd28fd79ddc2)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/8a6e8cee-e0ca-405c-80c2-d6bb5ef3c1f2/mini.png)](https://insight.sensiolabs.com/projects/8a6e8cee-e0ca-405c-80c2-d6bb5ef3c1f2)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a3a4516b265a474c979a3be3c2b71a13)](https://www.codacy.com/app/tuyetrinhvo/mysnowtricks?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tuyetrinhvo/mysnowtricks&amp;utm_campaign=Badge_Grade)
 
 #### All the features of the web application:
 
