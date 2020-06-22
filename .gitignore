@@ -16,9 +16,6 @@
 # Parameter
 /app/config/parameters.yml
 
-# Build data
-/build/
-
 # PHPUnit
 /phpunit.xml
 
@@ -29,6 +26,9 @@
 !bin/console
 !bin/symfony_requirements
 /vendor/
+
+# PHPStorm
+.idea
 
 
 
