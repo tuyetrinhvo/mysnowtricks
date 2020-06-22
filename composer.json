@@ -22,6 +22,7 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "symfony/symfony": "^3.4",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "~2.3",
         "stof/doctrine-extensions-bundle": "^1.2.2",
@@ -33,7 +34,6 @@
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
-        "symfony/symfony": "3.3.*",
         "twig/twig": "^1.0||^1.3",
         "symfony/assetic-bundle": "^2.7.1",
         "leafo/scssphp": "~0.6",
@@ -41,7 +41,6 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0",
         "phpunit/phpunit": "~5.7"
     },
     "scripts": {
